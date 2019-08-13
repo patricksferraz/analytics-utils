@@ -35,4 +35,4 @@ describe_data(dataframe, headers, lang)
   - skewness
   - count
 
-- lang: output language ['pt':portuguese (default) | 'en':english]
+- lang: output language {'pt':portuguese (default), 'en':english}
