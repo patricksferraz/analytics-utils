@@ -16,4 +16,5 @@ words = {
     "kurtosis": {"en": "kurtosis", "pt": "curtose"},
     "skew": {"en": "skewness", "pt": "assimetria"},
     "count": {"en": "count", "pt": "contagem"},
+    "lang": {"en": "language", "pt": "idioma"},
 }
