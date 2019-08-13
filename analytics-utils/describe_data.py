@@ -9,6 +9,9 @@ from lang.words import words
 from lang.phrases import phrases
 import pandas as pd
 
+FIRST_QUARTILE = 0.25
+THIRD_QUARTILE = 0.75
+
 
 def describe_data(
     data_frame: pd.DataFrame, headers: [str], lang: str = "pt"
@@ -41,7 +44,8 @@ def describe_data(
                 words["min"][lang]: _min,
                 words["mean"][lang]: column.mean(),
                 words["median"][lang]: column.median(),
-                words["quantile"][lang]("1"): column.quantile(),
+                words["quartile"][lang]("1"): column.quantile(FIRST_QUARTILE),
+                words["quartile"][lang]("3"): column.quantile(THIRD_QUARTILE),
                 words["var"][lang]: column.var(),
                 words["std"][lang]: column.std(),
                 words["mad"][lang]: column.mad(),
