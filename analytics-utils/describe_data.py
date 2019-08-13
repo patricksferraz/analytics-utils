@@ -84,8 +84,8 @@ if __name__ == "__main__":
         "--orient",
         type=str,
         default="columns",
-        help="format json output "
-        "{'split', 'records', 'index', 'values', 'table', 'columns'}",
+        help=""""format json output
+        {'split', 'records', 'index', 'values', 'table', 'columns'}""",
     )
     ap.add_argument(
         "header",
