@@ -4,8 +4,8 @@ words = {
     "min": {"en": "min", "pt": "min"},
     "mean": {"en": "mean", "pt": "média"},
     "median": {"en": "median", "pt": "mediana"},
-    "quantile": {
-        "en": lambda x: f"{x}-quantile",
+    "quartile": {
+        "en": lambda x: f"{x}-quartile",
         "pt": lambda x: f"{x}-quartil",
     },
     "var": {"en": "variance", "pt": "variância"},
