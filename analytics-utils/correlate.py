@@ -57,7 +57,8 @@ if __name__ == "__main__":
         "--method",
         type=str,
         default="pearson",
-        help="method of correlation {‘pearson’, ‘kendall’, ‘spearman’}",
+        help="""method of correlation {‘pearson’, ‘kendall’, ‘spearman’}
+        (default: 'pearson')""",
     )
     ap.add_argument(
         "-p",
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         default=1,
         help="""Minimum number of observations required per pair of columns to
         have a valid result. Currently only available for Pearson and
-        Spearman correlation.""",
+        Spearman correlation (default: 1).""",
     )
     args = vars(ap.parse_args())
 
