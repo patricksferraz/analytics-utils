@@ -5,7 +5,7 @@ Package contain function for data analytics
 ## Installing
 
 ```sh
-$ pip install analytics-utils
+pip install analytics-utils
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ describe_data(dataframe, headers, lang)
   - minimum
   - mean
   - median
-  - [1|3]-quantile
+  - [1|3]-quartile
   - variance
   - standard deviation
   - mean absolute deviation
