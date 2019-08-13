@@ -23,7 +23,7 @@ def describe_data(
 
     Arguments:
         data_frame {pd.DataFrame} -- dataframe of input
-        headers {[type]} -- chosen dataframe headers
+        headers {[str]} -- chosen dataframe headers
 
     Keyword Arguments:
         lang {str} -- output language (default: {"pt"})
@@ -77,14 +77,15 @@ if __name__ == "__main__":
         "--lang",
         type=str,
         default="pt",
-        help="language for the output result (pt|en)",
+        help="language for the output result {'pt', 'en'}",
     )
     ap.add_argument(
         "-o",
         "--orient",
         type=str,
         default="columns",
-        help="format json output (split|records|index|values|table|columns)",
+        help="format json output "
+        "{'split', 'records', 'index', 'values', 'table', 'columns'}",
     )
     ap.add_argument(
         "header",
@@ -100,6 +101,8 @@ if __name__ == "__main__":
         pd.read_csv(args["dataset"]), args["header"], args["lang"]
     )
     # Output in json format
-    result = result.to_json(args.get("file_out"), orient=args["orient"])
+    result = result.to_json(
+        args.get("file_out"), force_ascii=False, orient=args["orient"]
+    )
     if result:
         print(result)
