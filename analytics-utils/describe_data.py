@@ -91,7 +91,7 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "header",
+        "headers",
         metavar="H",
         type=str,
         nargs="+",
@@ -101,7 +101,7 @@ if __name__ == "__main__":
 
     # Generates the data description
     result = describe_data(
-        pd.read_csv(args["dataset"]), args["header"], args["lang"]
+        pd.read_csv(args["dataset"]), args["headers"], args["lang"]
     )
     # Output in json format
     result = result.to_json(
