@@ -100,4 +100,6 @@ if __name__ == "__main__":
         pd.read_csv(args["dataset"]), args["header"], args["lang"]
     )
     # Output in json format
-    print(result.to_json(args.get("file-out"), orient=args["orient"]))
+    result = result.to_json(args.get("file_out"), orient=args["orient"])
+    if result:
+        print(result)
