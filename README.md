@@ -12,6 +12,8 @@ pip install analytics-utils
 
 ### describe_data
 
+This function describe the datas of a dataframe. Returning the max, min, mean, median, quantile, variance, standard deviation, mean, absolute deviation, amplitude, root mean squared, kurtosis, skewness and count for all headers in dataframe
+
 ```python
 from analytics_utils.describe_data import describe_data
 
@@ -35,7 +37,10 @@ describe_data(dataframe, headers, lang)
   - skewness
   - count
 
-- lang: output language {'pt':portuguese (default), 'en':english}
+- lang: output language (default: 'pt')
+
+  - 'pt': portuguese
+  - 'en': english
 
 ### correlation
 
