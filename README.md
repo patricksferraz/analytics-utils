@@ -36,3 +36,23 @@ describe_data(dataframe, headers, lang)
   - count
 
 - lang: output language {'pt':portuguese (default), 'en':english}
+
+### correlation
+
+This function returns the correlation between the columns of a dataframe. This is the same corr function in pandas package.
+
+```python
+from analytics_utils.correlation import correlation
+
+correlation(dataframe, method, min_periods)
+```
+
+- dataframe: correlation dataframe
+- method: correlation method (default: {"pearson"}):
+
+  - pearson
+  - kendall
+  - spearman
+  - or callable with input two 1d ndarrays
+
+- min_periods: Minimum number of observations required per pair of columns to have a valid result. Currently only available for Pearson and Spearman correlation (default: {1}).
