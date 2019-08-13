@@ -61,3 +61,35 @@ correlate(dataframe, method, min_periods)
   - or callable with input two 1d ndarrays
 
 - min_periods: Minimum number of observations required per pair of columns to have a valid result. Currently only available for Pearson and Spearman correlation (default: {1}).
+
+### interpolate
+
+This function returns the Series or DataFrame of same shape interpolated at the NaNs. This is a adapted interpolate function of pandas package.
+
+```python
+from analytics_utils.interpolate import interpolate
+
+interpolate(dataframe, headers, method, limit)
+```
+
+- dataframe: dataframe for interpolation
+- headers: columns of dataframe for interpolating (default: {None}). For default, all are interpolated.
+- method: interpolation method (default: {"linear"}):
+
+  - linear
+  - time
+  - index
+  - values
+  - nearest
+  - zero
+  - slinear
+  - quadratic
+  - cubic
+  - barycentric
+  - krogh
+  - polynomial
+  - spline
+  - piecewise_polynomial
+  - pchip
+
+- limit: Maximum number of consecutive NaNs to fill (default: {None}).
