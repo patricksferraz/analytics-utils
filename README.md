@@ -42,14 +42,14 @@ describe_data(dataframe, headers, lang)
   - 'pt': portuguese
   - 'en': english
 
-### correlation
+### correlate
 
 This function returns the correlation between the columns of a dataframe. This is the same corr function in pandas package.
 
 ```python
-from analytics_utils.correlation import correlation
+from analytics_utils.correlate import correlate
 
-correlation(dataframe, method, min_periods)
+correlate(dataframe, method, min_periods)
 ```
 
 - dataframe: correlation dataframe

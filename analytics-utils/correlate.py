@@ -2,7 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def correlation(
+    def correlate(
         data_frame: pd.DataFrame, method: str = "pearson", min_periods: int = 1
     ) -> pd.DataFrame
 """
@@ -10,7 +10,7 @@ The find module supplies one function,
 import pandas as pd
 
 
-def correlation(
+def correlate(
     data_frame: pd.DataFrame, method: str = "pearson", min_periods: int = 1
 ) -> pd.DataFrame:
     """This function returns the correlation between the columns of a
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     args = vars(ap.parse_args())
 
     # Generates the data description
-    result = correlation(
+    result = correlate(
         pd.read_csv(args["dataset"]), args["method"], args["min_periods"]
     )
 
