@@ -2,7 +2,9 @@
 """
 This is the find module.
 The find module supplies one function,
-    describe_data(data_frame: pd.DataFrame, headers: [str], lang: str = "pt")
+    def describe_data(
+        data_frame: pd.DataFrame, headers: [str], lang: str = "pt"
+    ) -> pd.DataFrame
 """
 
 from lang.words import words
@@ -77,7 +79,7 @@ if __name__ == "__main__":
         "--lang",
         type=str,
         default="pt",
-        help="language for the output result {'pt', 'en'}",
+        help="language for the output result {'pt', 'en'} (default: 'pt')",
     )
     ap.add_argument(
         "-o",
@@ -85,7 +87,8 @@ if __name__ == "__main__":
         type=str,
         default="columns",
         help=""""format json output
-        {'split', 'records', 'index', 'values', 'table', 'columns'}""",
+        {'split', 'records', 'index', 'values', 'table', 'columns'}
+        (default: 'columns')""",
     )
     ap.add_argument(
         "header",
