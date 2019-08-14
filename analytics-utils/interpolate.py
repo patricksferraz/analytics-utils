@@ -39,9 +39,8 @@ def interpolate(
         NaNs
     """
     if headers:
-        return data_frame.loc[:, headers].interpolate(method, limit=limit)
-    else:
-        return data_frame.interpolate(method, limit=limit)
+        data_frame = data_frame.loc[:, headers]
+    return data_frame.interpolate(method, limit=limit)
 
 
 if __name__ == "__main__":
