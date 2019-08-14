@@ -15,9 +15,9 @@ import pandas as pd
 
 def interpolate(
     data_frame: pd.DataFrame,
-    headers: [str] = None,
-    method: str = "linear",
     limit: int = None,
+    method: str = "linear",
+    headers: [str] = None,
 ) -> pd.DataFrame:
     """This function returns the Series or DataFrame of same shape interpolated
     at the NaNs. This is a adapted interpolate function of pandas package.
@@ -26,13 +26,13 @@ def interpolate(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        headers {[type]} -- chosen dataframe headers (default: {None}).
+        limit {int} -- Maximum number of consecutive NaNs to fill
+        (default: {None}).
         method {str} -- {‘linear’, ‘time’, ‘index’, ‘values’, ‘nearest’,
         ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘barycentric’, ‘krogh’,
         ‘polynomial’, ‘spline’ ‘piecewise_polynomial’, ‘pchip’}
         (default: {"linear"}).
-        limit {int} -- Maximum number of consecutive NaNs to fill
-        (default: {None}).
+        headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
         pd.DataFrame -- Series or DataFrame of same shape interpolated at the
@@ -92,9 +92,9 @@ if __name__ == "__main__":
     # Generates the data description
     result = interpolate(
         pd.read_csv(args["dataset"]),
-        args["headers"],
-        args["method"],
-        args["limit"],
+        limit=args["limit"],
+        method=args["method"],
+        headers=args["headers"],
     )
 
     # Output in json format
