@@ -16,7 +16,7 @@ THIRD_QUARTILE = 0.75
 
 
 def describe_data(
-    data_frame: pd.DataFrame, headers: [str], lang: str = "pt"
+    data_frame: pd.DataFrame, lang: str = "pt", headers: [str] = None
 ) -> pd.DataFrame:
     """This function describe the datas of a dataframe. Returning the max,
     min, mean, median, quantile, variance, standard deviation,
@@ -28,7 +28,8 @@ def describe_data(
         headers {[str]} -- chosen dataframe headers
 
     Keyword Arguments:
-        lang {str} -- output language (default: {"pt"})
+        lang {str} -- output language (default: {"pt"}).
+        headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
         pd.Dataframe -- dataframe with the descriptions
@@ -75,13 +76,6 @@ if __name__ == "__main__":
         "-f", "--file-out", type=str, help="path to file of output json"
     )
     ap.add_argument(
-        "-l",
-        "--lang",
-        type=str,
-        default="pt",
-        help="language for the output result {'pt', 'en'} (default: 'pt')",
-    )
-    ap.add_argument(
         "-o",
         "--orient",
         type=str,
@@ -89,6 +83,13 @@ if __name__ == "__main__":
         help=""""format json output
         {'split', 'records', 'index', 'values', 'table', 'columns'}
         (default: 'columns')""",
+    )
+    ap.add_argument(
+        "-l",
+        "--lang",
+        type=str,
+        default="pt",
+        help="language for the output result {'pt', 'en'} (default: 'pt')",
     )
     ap.add_argument(
         "headers",
@@ -101,7 +102,9 @@ if __name__ == "__main__":
 
     # Generates the data description
     result = describe_data(
-        pd.read_csv(args["dataset"]), args["headers"], args["lang"]
+        pd.read_csv(args["dataset"]),
+        lang=args["lang"],
+        headers=args["headers"],
     )
     # Output in json format
     result = result.to_json(
