@@ -63,7 +63,7 @@ if __name__ == "__main__":
         "--orient",
         type=str,
         default="columns",
-        help=""""format json output
+        help="""format json output
         {'split', 'records', 'index', 'values', 'table', 'columns'}
         (default: 'columns')""",
     )
@@ -84,17 +84,40 @@ if __name__ == "__main__":
         help="""{‘mean’, ‘var’, 'std'} (default: {"mean"}).""",
     )
     ap.add_argument(
-        "headers",
-        metavar="H",
+        "-pd",
+        "--parse-dates",
+        type=str,
+        nargs="*",
+        help="""Headers of columns to parse dates. A column named datetime is
+        created.""",
+    )
+    ap.add_argument(
+        "-i",
+        "--index",
+        type=str,
+        nargs="*",
+        help="Headers of columns to set as index.",
+    )
+    ap.add_argument(
+        "-hd",
+        "--headers",
         type=str,
         nargs="*",
         help="an string for the header in the dataset",
     )
     args = vars(ap.parse_args())
 
+    # If exist parse_dates, creates a structure with column name datetime
+    if args["parse_dates"]:
+        args["parse_dates"] = {"datetime": args["parse_dates"]}
+
     # Generates the data description
     result = roll(
-        pd.read_csv(args["dataset"]),
+        pd.read_csv(
+            args["dataset"],
+            parse_dates=args["parse_dates"],
+            index_col=args["index"],
+        ),
         window=args["window"],
         roll_type=args["roll_type"],
         headers=args["headers"],
