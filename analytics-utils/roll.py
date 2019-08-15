@@ -2,11 +2,11 @@
 """
 This is the find module.
 The find module supplies one function,
-    def interpolate(
+    def roll(
         data_frame: pd.DataFrame,
+        window: int,
+        roll_type: str = "mean",
         headers: [str] = None,
-        method: str = "linear",
-        limit: int = None,
     ) -> pd.DataFrame
 """
 
