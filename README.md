@@ -173,26 +173,35 @@ interpolate(dataframe, headers, method, limit)
 - **Help message**
 
 ```sh
-usage: correlate.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m METHOD]
-                    [-p MIN_PERIODS]
+usage: interpolate.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m METHOD]
+                      [-l LIMIT] [-pd [PARSE_DATES [PARSE_DATES ...]]]
+                      [-i [INDEX [INDEX ...]]] [-hd [H [H ...]]]
 
-optional arguments:
+optional arguments
   -h, --help            show this help message and exit
   -d DATASET, --dataset DATASET
                         path to input dataset
   -f FILE_OUT, --file-out FILE_OUT
                         path to file of output json
   -o ORIENT, --orient ORIENT
-                        format json output {'split', 'records', 'index',
+                        "format json output {'split', 'records', 'index',
                         'values', 'table', 'columns'} (default: 'columns')
   -m METHOD, --method METHOD
-                        method of correlation {‘pearson’, ‘kendall’,
-                        ‘spearman’} (default: 'pearson')
-  -p MIN_PERIODS, --min-periods MIN_PERIODS
-                        Minimum number of observations required per pair of
-                        columns to have a valid result. Currently only
-                        available for Pearson and Spearman correlation
-                        (default: 1).
+                        method of interpolation {‘linear’, ‘time’, ‘index’,
+                        ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’,
+                        ‘cubic’, ‘barycentric’, ‘krogh’, ‘polynomial’,
+                        ‘spline’ ‘piecewise_polynomial’, ‘pchip’} (default:
+                        'linear')
+  -l LIMIT, --limit LIMIT
+                        Maximum number of consecutive NaNs to fill (default:
+                        None)
+  -pd [PARSE_DATES [PARSE_DATES ...]], --parse-dates [PARSE_DATES [PARSE_DATES ...]]
+                        Headers of columns to parse dates. A column named
+                        datetime is created.
+  -i [INDEX [INDEX ...]], --index [INDEX [INDEX ...]]
+                        Headers of columns to set as index.
+  -hd [H [H ...]], --headers [H [H ...]]
+                        an string for the header in the dataset
 ```
 
 - **Usage**
