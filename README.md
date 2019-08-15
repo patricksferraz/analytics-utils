@@ -48,7 +48,7 @@ describe_data(dataframe, headers, lang)
 
 - **Help message**
 
-````sh
+```sh
 usage: describe_data.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-l LANG]
                         [-pd [PARSE_DATES [PARSE_DATES ...]]]
                         [-i [INDEX [INDEX ...]]] [-hd [H [H ...]]]
@@ -87,7 +87,8 @@ This function returns the correlation between the columns of a dataframe. This i
 from analytics_utils.correlate import correlate
 
 correlate(dataframe, method, min_periods)
-````
+`
+```
 
 - dataframe: correlation dataframe
 - method: correlation method (default: {"pearson"}):
