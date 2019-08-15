@@ -81,7 +81,23 @@ if __name__ == "__main__":
         help="""Maximum number of consecutive NaNs to fill (default: None)""",
     )
     ap.add_argument(
-        "headers",
+        "-pd",
+        "--parse-dates",
+        type=str,
+        nargs="*",
+        help="""Headers of columns to parse dates. A column named datetime is
+        created.""",
+    )
+    ap.add_argument(
+        "-i",
+        "--index",
+        type=str,
+        nargs="*",
+        help="Headers of columns to set as index.",
+    )
+    ap.add_argument(
+        "-hd",
+        "--headers",
         metavar="H",
         type=str,
         nargs="*",
@@ -89,9 +105,17 @@ if __name__ == "__main__":
     )
     args = vars(ap.parse_args())
 
-    # Generates the data description
+    # If exist parse_dates, creates a structure with column name datetime
+    if args["parse_dates"]:
+        args["parse_dates"] = {"datetime": args["parse_dates"]}
+
+    # Interpolated datas
     result = interpolate(
-        pd.read_csv(args["dataset"]),
+        pd.read_csv(
+            args["dataset"],
+            parse_dates=args["parse_dates"],
+            index_col=args["index"],
+        ),
         limit=args["limit"],
         method=args["method"],
         headers=args["headers"],
