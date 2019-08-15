@@ -14,7 +14,7 @@ pip install analytics-utils
 
 This function describe the datas of a dataframe. Returning the max, min, mean, median, quantile, variance, standard deviation, mean, absolute deviation, amplitude, root mean squared, kurtosis, skewness and count for all headers in dataframe
 
-#### Function
+#### function
 
 ```python
 from analytics_utils.describe_data import describe_data
@@ -44,7 +44,7 @@ describe_data(dataframe, headers, lang)
   - 'pt': portuguese
   - 'en': english
 
-#### Terminal
+#### terminal
 
 - **Help message**
 
@@ -83,7 +83,7 @@ python describe_data.py -d dataset.csv -pd date time -i datetime -f out.json
 
 This function returns the correlation between the columns of a dataframe. This is the same corr function in pandas package.
 
-#### Function
+#### function
 
 ```python
 from analytics_utils.correlate import correlate
@@ -101,7 +101,7 @@ correlate(dataframe, method, min_periods)
 
 - min_periods: Minimum number of observations required per pair of columns to have a valid result. Currently only available for Pearson and Spearman correlation (default: {1}).
 
-#### Terminal
+#### terminal
 
 - **Help message**
 
@@ -134,9 +134,11 @@ optional arguments:
 python correlate.py -d dataset.csv -f out.json
 ```
 
-## interpolate
+### interpolate
 
 This function returns the Series or DataFrame of same shape interpolated at the NaNs. This is a adapted interpolate function of pandas package.
+
+#### function
 
 ```python
 from analytics_utils.interpolate import interpolate
@@ -165,3 +167,36 @@ interpolate(dataframe, headers, method, limit)
   - pchip
 
 - limit: Maximum number of consecutive NaNs to fill (default: {None}).
+
+#### terminal
+
+- **Help message**
+
+```sh
+usage: correlate.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m METHOD]
+                    [-p MIN_PERIODS]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        path to input dataset
+  -f FILE_OUT, --file-out FILE_OUT
+                        path to file of output json
+  -o ORIENT, --orient ORIENT
+                        format json output {'split', 'records', 'index',
+                        'values', 'table', 'columns'} (default: 'columns')
+  -m METHOD, --method METHOD
+                        method of correlation {‘pearson’, ‘kendall’,
+                        ‘spearman’} (default: 'pearson')
+  -p MIN_PERIODS, --min-periods MIN_PERIODS
+                        Minimum number of observations required per pair of
+                        columns to have a valid result. Currently only
+                        available for Pearson and Spearman correlation
+                        (default: 1).
+```
+
+- **Usage**
+
+```sh
+python analytics-utils/interpolate.py -d dataset.csv -f out.json
+```
