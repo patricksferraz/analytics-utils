@@ -14,6 +14,8 @@ pip install analytics-utils
 
 This function describe the datas of a dataframe. Returning the max, min, mean, median, quantile, variance, standard deviation, mean, absolute deviation, amplitude, root mean squared, kurtosis, skewness and count for all headers in dataframe
 
+#### Function
+
 ```python
 from analytics_utils.describe_data import describe_data
 
@@ -42,6 +44,41 @@ describe_data(dataframe, headers, lang)
   - 'pt': portuguese
   - 'en': english
 
+#### Terminal
+
+- **Help message**
+
+````sh
+usage: describe_data.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-l LANG]
+                        [-pd [PARSE_DATES [PARSE_DATES ...]]]
+                        [-i [INDEX [INDEX ...]]] [-hd [H [H ...]]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        path to input dataset
+  -f FILE_OUT, --file-out FILE_OUT
+                        path to file of output json
+  -o ORIENT, --orient ORIENT
+                        "format json output {'split', 'records', 'index',
+                        'values', 'table', 'columns'} (default: 'columns')
+  -l LANG, --lang LANG  language for the output result {'pt', 'en'} (default:
+                        'pt')
+  -pd [PARSE_DATES [PARSE_DATES ...]], --parse-dates [PARSE_DATES [PARSE_DATES ...]]
+                        Headers of columns to parse dates. A column named
+                        datetime is created.
+  -i [INDEX [INDEX ...]], --index [INDEX [INDEX ...]]
+                        Headers of columns to set as index.
+  -hd [H [H ...]], --headers [H [H ...]]
+                        an string for the header in the dataset
+```
+
+- **Usage**
+
+```sh
+python describe_data.py -d dataset.csv -pd date time -i datetime -f out.json
+```
+
 ### correlate
 
 This function returns the correlation between the columns of a dataframe. This is the same corr function in pandas package.
@@ -50,7 +87,7 @@ This function returns the correlation between the columns of a dataframe. This i
 from analytics_utils.correlate import correlate
 
 correlate(dataframe, method, min_periods)
-```
+````
 
 - dataframe: correlation dataframe
 - method: correlation method (default: {"pearson"}):
