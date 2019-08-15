@@ -88,6 +88,13 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
+        "-l",
+        "--lang",
+        type=str,
+        default="pt",
+        help="language for the output result {'pt', 'en'} (default: 'pt')",
+    )
+    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -101,13 +108,6 @@ if __name__ == "__main__":
         type=str,
         nargs="*",
         help="Headers of columns to set as index.",
-    )
-    ap.add_argument(
-        "-l",
-        "--lang",
-        type=str,
-        default="pt",
-        help="language for the output result {'pt', 'en'} (default: 'pt')",
     )
     ap.add_argument(
         "-hd",
