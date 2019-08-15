@@ -83,11 +83,12 @@ python describe_data.py -d dataset.csv -pd date time -i datetime -f out.json
 
 This function returns the correlation between the columns of a dataframe. This is the same corr function in pandas package.
 
+#### Function
+
 ```python
 from analytics_utils.correlate import correlate
 
 correlate(dataframe, method, min_periods)
-`
 ```
 
 - dataframe: correlation dataframe
@@ -100,7 +101,40 @@ correlate(dataframe, method, min_periods)
 
 - min_periods: Minimum number of observations required per pair of columns to have a valid result. Currently only available for Pearson and Spearman correlation (default: {1}).
 
-### interpolate
+#### Terminal
+
+- **Help message**
+
+```sh
+usage: correlate.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m METHOD]
+                    [-p MIN_PERIODS]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        path to input dataset
+  -f FILE_OUT, --file-out FILE_OUT
+                        path to file of output json
+  -o ORIENT, --orient ORIENT
+                        format json output {'split', 'records', 'index',
+                        'values', 'table', 'columns'} (default: 'columns')
+  -m METHOD, --method METHOD
+                        method of correlation {‘pearson’, ‘kendall’,
+                        ‘spearman’} (default: 'pearson')
+  -p MIN_PERIODS, --min-periods MIN_PERIODS
+                        Minimum number of observations required per pair of
+                        columns to have a valid result. Currently only
+                        available for Pearson and Spearman correlation
+                        (default: 1).
+```
+
+- **Usage**
+
+```sh
+python correlate.py -d dataset.csv -f out.json
+```
+
+## interpolate
 
 This function returns the Series or DataFrame of same shape interpolated at the NaNs. This is a adapted interpolate function of pandas package.
 
