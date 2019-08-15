@@ -210,6 +210,65 @@ optional arguments
 python analytics-utils/interpolate.py -d dataset.csv -f out.json
 ```
 
+# rolling window
+
+This function Provide rolling window calculations. This is a adapted rolling function of pandas package.
+
+## function
+
+```python
+from analytics_utils.roll import roll
+
+roll(dataframe, window, roll_type, headers)
+```
+
+- dataframe: dataframe for apply rolling
+- window: Size of the moving window. This is the number of observations used for calculating the statistic. Each window will be a fixed size.
+- roll_type: rolling method (default: {"mean"}):
+
+  - mean
+  - var (variance)
+  - std (standard deviation)
+
+## terminal
+
+- **Help message**
+
+```sh
+usage: roll.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] -w WINDOW
+               [-t ROLL_TYPE] [-pd [PARSE_DATES [PARSE_DATES ...]]]
+               [-i [INDEX [INDEX ...]]] [-hd [HEADERS [HEADERS ...]]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        path to input dataset
+  -f FILE_OUT, --file-out FILE_OUT
+                        path to file of output json
+  -o ORIENT, --orient ORIENT
+                        format json output {'split', 'records', 'index',
+                        'values', 'table', 'columns'} (default: 'columns')
+  -w WINDOW, --window WINDOW
+                        Size of the moving window. This is the number of
+                        observations used for calculating the statistic. Each
+                        window will be a fixed size.
+  -t ROLL_TYPE, --roll_type ROLL_TYPE
+                        {‘mean’, ‘var’, 'std'} (default: {"mean"}).
+  -pd [PARSE_DATES [PARSE_DATES ...]], --parse-dates [PARSE_DATES [PARSE_DATES ...]]
+                        Headers of columns to parse dates. A column named
+                        datetime is created.
+  -i [INDEX [INDEX ...]], --index [INDEX [INDEX ...]]
+                        Headers of columns to set as index.
+  -hd [HEADERS [HEADERS ...]], --headers [HEADERS [HEADERS ...]]
+                        an string for the header in the dataset
+```
+
+- **Usage**
+
+```sh
+python analytics-utils/roll.py -w 12 -d dataset.csv -f out.json
+```
+
 ### exponential weighted moving
 
 This function provide exponential weighted functions. This is a adapted ewm function of pandas package.
