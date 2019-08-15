@@ -60,7 +60,7 @@ optional arguments:
   -f FILE_OUT, --file-out FILE_OUT
                         path to file of output json
   -o ORIENT, --orient ORIENT
-                        "format json output {'split', 'records', 'index',
+                        format json output {'split', 'records', 'index',
                         'values', 'table', 'columns'} (default: 'columns')
   -l LANG, --lang LANG  language for the output result {'pt', 'en'} (default:
                         'pt')
