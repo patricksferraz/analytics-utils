@@ -27,6 +27,29 @@ def ewm(
     ewm_type: str = "mean",
     headers: [str] = None,
 ) -> pd.DataFrame:
+    """This function provide exponential weighted functions. This is a adapted
+    ewm function of pandas package.
+
+    Arguments:
+        data_frame {pd.DataFrame} -- input dataframe
+
+    Keyword Arguments:
+        com {int} -- Specify decay in terms of center of mass, α=1/(1+com),
+        for com≥0 (default: {None}).
+        span {float} -- Specify decay in terms of span, α=2/(span+1),
+        for span≥1. (default: {None}).
+        halflife {float} -- Specify decay in terms of half-life,
+        α=1−exp(log(0.5)/halflife),for halflife>0 (default: {None}).
+        alpha {float} -- Specify smoothing factor α directly, 0<α≤1
+        (default: {None}).
+        ignore_na {bool} -- Ignore missing values when calculating weights;
+        specify True to reproduce pre-0.15.0 behavior.(default: {False}).
+        ewm_type {str} -- {‘mean’, ‘var’, 'std'} (default: {"mean"}).
+        headers {[str]} -- chosen dataframe headers (default: {None}).
+
+    Returns:
+        pd.DataFrame -- A Window sub-classed for the particular operation.
+    """
     ewm = {
         "mean": lambda ewm: ewm.mean(),
         "var": lambda ewm: ewm.var(),
@@ -98,7 +121,7 @@ if __name__ == "__main__":
         help="""Specify smoothing factor α directly, 0<α≤1 (default: None).""",
     )
     ap.add_argument(
-        "-i",
+        "-ina",
         "--ignore-na",
         type=bool,
         default=False,
@@ -113,17 +136,40 @@ if __name__ == "__main__":
         help="""{‘mean’, ‘var’, 'std'} (default: {"mean"}).""",
     )
     ap.add_argument(
-        "headers",
-        metavar="H",
+        "-pd",
+        "--parse-dates",
+        type=str,
+        nargs="*",
+        help="""Headers of columns to parse dates. A column named datetime is
+        created.""",
+    )
+    ap.add_argument(
+        "-i",
+        "--index",
+        type=str,
+        nargs="*",
+        help="Headers of columns to set as index.",
+    )
+    ap.add_argument(
+        "-hd",
+        "--headers",
         type=str,
         nargs="*",
         help="an string for the header in the dataset",
     )
     args = vars(ap.parse_args())
 
+    # If exist parse_dates, creates a structure with column name datetime
+    if args["parse_dates"]:
+        args["parse_dates"] = {"datetime": args["parse_dates"]}
+
     # Apply ewm
     result = ewm(
-        pd.read_csv(args["dataset"]),
+        pd.read_csv(
+            args["dataset"],
+            parse_dates=args["parse_dates"],
+            index_col=args["index"],
+        ),
         com=args["com"],
         span=args["span"],
         halflife=args["halflife"],
