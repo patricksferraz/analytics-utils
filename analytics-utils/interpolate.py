@@ -59,7 +59,7 @@ if __name__ == "__main__":
         "--orient",
         type=str,
         default="columns",
-        help=""""format json output
+        help="""format json output
         {'split', 'records', 'index', 'values', 'table', 'columns'}
         (default: 'columns')""",
     )
