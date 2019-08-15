@@ -61,6 +61,9 @@ def describe_data(
         except KeyError:
             return {"error": phrases["unsupported"]["pt"](words["lang"]["pt"])}
 
+    if not headers:
+        headers = data_frame.columns
+
     return pd.DataFrame([_apply(_, data_frame.loc[:, _]) for _ in headers])
 
 
@@ -92,17 +95,41 @@ if __name__ == "__main__":
         help="language for the output result {'pt', 'en'} (default: 'pt')",
     )
     ap.add_argument(
-        "headers",
+        "-pd",
+        "--parse-dates",
+        type=str,
+        nargs="*",
+        help="""Headers of columns to parse dates. A column named datetime is
+        created.""",
+    )
+    ap.add_argument(
+        "-i",
+        "--index",
+        type=str,
+        nargs="*",
+        help="Headers of columns to set as index.",
+    )
+    ap.add_argument(
+        "-hd",
+        "--headers",
         metavar="H",
         type=str,
-        nargs="+",
+        nargs="*",
         help="an string for the header in the dataset",
     )
     args = vars(ap.parse_args())
 
+    # If exist parse_dates, creates a structure with column name datetime
+    if args["parse_dates"]:
+        args["parse_dates"] = {"datetime": args["parse_dates"]}
+
     # Generates the data description
     result = describe_data(
-        pd.read_csv(args["dataset"]),
+        pd.read_csv(
+            args["dataset"],
+            parse_dates=args["parse_dates"],
+            index_col=args["index"],
+        ),
         lang=args["lang"],
         headers=args["headers"],
     )
