@@ -282,19 +282,18 @@ ewm(dataframe, com, span, halflife, alpha, ignore_na, ewm_type, headers)
 ```
 
 - dataframe: dataframe for apply ewm
-- headers: columns of dataframe for apply ewm (default: {None}).
-- com: specify decay in terms of center of mass, α=1/(1+com), for com≥0.
-- span: specify decay in terms of span, α=2/(span+1), for span≥1.
-- halflife: specify decay in terms of half-life, α=1−exp(log(0.5)/halflife),for halflife>0.
-- alpha: specify smoothing factor α directly, 0<α≤1.
-- ignore_na: ignore missing values when calculating weights; specify True to reproduce pre-0.15.0 behavior.
+- com: specify decay in terms of center of mass, α=1/(1+com), for com≥0 (default: {None}).
+- span: specify decay in terms of span, α=2/(span+1), for span≥1 (default: {None}).
+- halflife: specify decay in terms of half-life, α=1−exp(log(0.5)/halflife),for halflife>0 (default: {None}).
+- alpha: specify smoothing factor α directly, 0<α≤1 (default: {None}).
+- ignore_na: ignore missing values when calculating weights; specify True to reproduce pre-0.15.0 behavior (default: {False}).
 - ewm_type: ewm method (default: {"mean"}):
 
   - mean
   - var (variance)
   - std (standard deviation)
 
-- limit: Maximum number of consecutive NaNs to fill (default: {None}).
+- headers: columns of dataframe for apply ewm (default: {None}).
 
 #### terminal
 
