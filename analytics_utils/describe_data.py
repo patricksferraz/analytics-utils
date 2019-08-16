@@ -13,7 +13,7 @@ if __name__ == "__main__":
     from lang.words import words
     from lang.phrases import phrases
 else:
-    from analytics_utils.lang.lang.words import words
+    from analytics_utils.lang.words import words
     from analytics_utils.lang.phrases import phrases
 
 FIRST_QUARTILE = 0.25
@@ -69,7 +69,9 @@ def describe_data(
     if not headers:
         headers = data_frame.columns
 
-    return pd.DataFrame([_apply(_, data_frame.loc[:, _]) for _ in headers])
+    return pd.DataFrame(
+        [_apply(_, data_frame.loc[:, _]) for _ in headers]
+    ).set_index(words["header"][lang])
 
 
 if __name__ == "__main__":
