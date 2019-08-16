@@ -148,7 +148,7 @@ interpolate(dataframe, headers, method, limit)
 
 - dataframe: dataframe for interpolation
 - headers: columns of dataframe for interpolating (default: {None}). For default, all are interpolated.
-- method: interpolation method (default: {"linear"}):
+- method: interpolation method. Please note that only method='linear' is supported for DataFrame/Series with a MultiIndex. (default: {"linear"}):
 
   - linear
   - time
@@ -177,7 +177,7 @@ usage: interpolate.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m METHOD]
                       [-l LIMIT] [-pd [PARSE_DATES [PARSE_DATES ...]]]
                       [-i [INDEX [INDEX ...]]] [-hd [H [H ...]]]
 
-optional arguments
+optional arguments:
   -h, --help            show this help message and exit
   -d DATASET, --dataset DATASET
                         path to input dataset
@@ -187,11 +187,12 @@ optional arguments
                         format json output {'split', 'records', 'index',
                         'values', 'table', 'columns'} (default: 'columns')
   -m METHOD, --method METHOD
-                        method of interpolation {‘linear’, ‘time’, ‘index’,
-                        ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’,
-                        ‘cubic’, ‘barycentric’, ‘krogh’, ‘polynomial’,
-                        ‘spline’ ‘piecewise_polynomial’, ‘pchip’} (default:
-                        'linear')
+                        method of interpolation. Please note that only
+                        method='linear' is supported for DataFrame/Series with
+                        a MultiIndex. {‘linear’, ‘time’, ‘index’, ‘values’,
+                        ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
+                        ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’
+                        ‘piecewise_polynomial’, ‘pchip’} (default: 'linear')
   -l LIMIT, --limit LIMIT
                         Maximum number of consecutive NaNs to fill (default:
                         None)

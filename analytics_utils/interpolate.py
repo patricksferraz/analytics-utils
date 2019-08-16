@@ -28,10 +28,11 @@ def interpolate(
     Keyword Arguments:
         limit {int} -- Maximum number of consecutive NaNs to fill
         (default: {None}).
-        method {str} -- {‘linear’, ‘time’, ‘index’, ‘values’, ‘nearest’,
-        ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘barycentric’, ‘krogh’,
-        ‘polynomial’, ‘spline’ ‘piecewise_polynomial’, ‘pchip’}
-        (default: {"linear"}).
+        method {str} -- Please note that only method='linear' is supported for
+        DataFrame/Series with a MultiIndex. {‘linear’, ‘time’, ‘index’,
+        ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
+        ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’ ‘piecewise_polynomial’,
+        ‘pchip’} (default: {"linear"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
@@ -68,10 +69,11 @@ if __name__ == "__main__":
         "--method",
         type=str,
         default="linear",
-        help="""method of interpolation {‘linear’, ‘time’, ‘index’, ‘values’,
-        ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘barycentric’,
-        ‘krogh’, ‘polynomial’, ‘spline’ ‘piecewise_polynomial’, ‘pchip’}
-        (default: 'linear')""",
+        help="""method of interpolation. Please note that only method='linear'
+        is supported for DataFrame/Series with a MultiIndex. {‘linear’, ‘time’,
+        ‘index’, ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
+        ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’ ‘piecewise_polynomial’,
+        ‘pchip’} (default: 'linear')""",
     )
     ap.add_argument(
         "-l",
