@@ -17,4 +17,8 @@ words = {
     "skew": {"en": "skewness", "pt": "assimetria"},
     "count": {"en": "count", "pt": "contagem"},
     "lang": {"en": "language", "pt": "idioma"},
+    "observed": {"en": "observed", "pt": "observado"},
+    "seasonal": {"en": "seasonal", "pt": "sazonal"},
+    "trend": {"en": "trend", "pt": "tendência"},
+    "resid": {"en": "residual", "pt": "residual"},
 }
