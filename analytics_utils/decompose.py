@@ -16,6 +16,13 @@ The find module supplies one function,
 from statsmodels.tsa.seasonal import seasonal_decompose
 import pandas as pd
 
+if __name__ == "__main__":
+    from lang.words import words
+    from lang.phrases import phrases
+else:
+    from analytics_utils.lang.words import words
+    from analytics_utils.lang.phrases import phrases
+
 
 def decompose(
     data_frame: pd.DataFrame,
@@ -24,6 +31,7 @@ def decompose(
     freq: int = None,
     two_sided: bool = True,
     extrapolate_trend: int = 0,
+    lang: str = "pt",
     headers: [str] = None,
 ) -> pd.DataFrame:
     """Seasonal decomposition using moving averages. This is a adapted
@@ -51,10 +59,12 @@ def decompose(
         points. If set to ‘freq’, use freq closest points. Setting this
         parameter results in no NaN values in trend or resid components
         (default: {False}).
+        lang {str} -- output language (default: {"pt"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
-        pd.DataFrame -- A object with seasonal, trend, and resid attributes.
+        pd.DataFrame -- A object with observed, seasonal, trend, and resid
+        attributes.
     """
 
     if headers:
@@ -71,10 +81,10 @@ def decompose(
     return pd.DataFrame(
         [
             {
-                "observed": seasonal.observed,
-                "seasonal": seasonal.seasonal,
-                "trend": seasonal.trend,
-                "resid": seasonal.resid,
+                words["observed"][lang]: seasonal.observed,
+                words["seasonal"][lang]: seasonal.seasonal,
+                words["trend"][lang]: seasonal.trend,
+                words["resid"][lang]: seasonal.resid,
             }
         ]
     )
@@ -148,6 +158,13 @@ if __name__ == "__main__":
         (default: False).""",
     )
     ap.add_argument(
+        "-l",
+        "--lang",
+        type=str,
+        default="pt",
+        help="language for the output result {'pt', 'en'} (default: 'pt')",
+    )
+    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -187,6 +204,7 @@ if __name__ == "__main__":
         freq=args["freq"],
         two_sided=args["two_sided"],
         extrapolate_trend=args["extrapolate_trend"],
+        lang=args["lang"],
     )
 
     # Output in json format
