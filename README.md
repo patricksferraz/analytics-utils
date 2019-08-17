@@ -345,3 +345,89 @@ optional arguments:
 ```sh
 python analytics-utils/ewm.py -hl 12 -d dataset.csv -f out.json
 ```
+
+### seasonal decompose
+
+Seasonal decomposition using moving averages. This is a adapted seasonal_decompose function of statsmodels package.
+
+#### function
+
+```python
+from analytics_utils.decompose import decompose
+
+decompose(dataframe, model, filt, freq, two_sided, extrapolate_trend, lang, headers)
+```
+
+- dataframe: dataframe for apply decompose
+- model: Type of seasonal component. Abbreviations are accepted (default: {'additive'}).
+
+  - additive
+  - multiplicative
+
+- filt: The filter coefficients for filtering out the seasonal component. The concrete moving average method used in filtering is determined by two_sided (default: {None}).
+- freq: Frequency of the series. Must be used if x is not a pandas object. Overrides default periodicity of x if x is a pandas object with a timeseries index (default: {None}).
+- two_sided: The moving average method used in filtering. If True (default), a centered moving average is computed using the filt. If False, the filter coefficients are for past values only (default: {True}).
+- extrapolate_trend: If set to > 0, the trend resulting from the convolution is linear least-squares extrapolated on both ends (or the single one if two_sided is False) considering this many (+1) closest points. If set to 'freq', use freq closest points. Setting this parameter results in no NaN values in trend or resid components (default: {0}).
+- headers: columns of dataframe for apply ewm (default: {None}).
+
+#### terminal
+
+- **Help message**
+
+```sh
+usage: decompose.py [-h] -d DATASET [-f FILE_OUT] [-o ORIENT] [-m MODEL]
+                    [-ft [FILT [FILT ...]]] [-fq FREQ] [-t TWO_SIDED]
+                    [-e EXTRAPOLATE_TREND] [-l LANG]
+                    [-pd [PARSE_DATES [PARSE_DATES ...]]]
+                    [-i [INDEX [INDEX ...]]] [-hd [HEADERS [HEADERS ...]]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        path to input dataset
+  -f FILE_OUT, --file-out FILE_OUT
+                        path to file of output json
+  -o ORIENT, --orient ORIENT
+                        format json output {'split', 'records', 'index',
+                        'values', 'table', 'columns'} (default: 'columns')
+  -m MODEL, --model MODEL
+                        Type of seasonal component. Abbreviations are accepted
+                        (default: 'additive').
+  -ft [FILT [FILT ...]], --filt [FILT [FILT ...]]
+                        The filter coefficients for filtering out the seasonal
+                        component. The concrete moving average method used in
+                        filtering is determined by two_sided (default: None).
+  -fq FREQ, --freq FREQ
+                        Frequency of the series. Must be used if x is not a
+                        pandas object. Overrides default periodicity of x if x
+                        is a pandas object with a timeseries index (default:
+                        None).
+  -t TWO_SIDED, --two-sided TWO_SIDED
+                        The moving average method used in filtering. If True
+                        (default), a centered moving average is computed using
+                        the filt. If False, the filter coefficients are for
+                        past values only (default: True).
+  -e EXTRAPOLATE_TREND, --extrapolate-trend EXTRAPOLATE_TREND
+                        If set to > 0, the trend resulting from the
+                        convolution is linear least-squares extrapolated on
+                        both ends (or the single one if two_sided is False)
+                        considering this many (+1) closest points. If set to
+                        ‘freq’, use freq closest points. Setting this
+                        parameter results in no NaN values in trend or resid
+                        components (default: 0).
+  -l LANG, --lang LANG  language for the output result {'pt', 'en'} (default:
+                        'pt')
+  -pd [PARSE_DATES [PARSE_DATES ...]], --parse-dates [PARSE_DATES [PARSE_DATES ...]]
+                        Headers of columns to parse dates. A column named
+                        datetime is created.
+  -i [INDEX [INDEX ...]], --index [INDEX [INDEX ...]]
+                        Headers of columns to set as index.
+  -hd [HEADERS [HEADERS ...]], --headers [HEADERS [HEADERS ...]]
+                        an string for the header in the dataset
+```
+
+- **Usage**
+
+```sh
+python analytics-utils/decompose.py -pd date time -i datetime -fq 12 -d dataset.csv -f out.json
+```
