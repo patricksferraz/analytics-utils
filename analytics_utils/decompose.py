@@ -18,10 +18,8 @@ import pandas as pd
 
 if __name__ == "__main__":
     from lang.words import words
-    from lang.phrases import phrases
 else:
     from analytics_utils.lang.words import words
-    from analytics_utils.lang.phrases import phrases
 
 
 def decompose(
@@ -41,8 +39,8 @@ def decompose(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        model {str} -- Type of seasonal component. Abbreviations are accepted
-        (default: {None}).
+        model {str} -- {“additive”, “multiplicative”}. Type of seasonal
+        component. Abbreviations are accepted (default: {'additive'}).
         filt {[]]} -- The filter coefficients for filtering out the seasonal
         component. The concrete moving average method used in filtering is
         determined by two_sided.(default: {None}).
@@ -50,15 +48,15 @@ def decompose(
         pandas object. Overrides default periodicity of x if x is a pandas
         object with a timeseries index (default: {None}).
         two_sided {bool} -- The moving average method used in filtering. If
-        True (default), a centered moving average is computed using the filt.
+        True, a centered moving average is computed using the filt.
         If False, the filter coefficients are for past values only
-        (default: {None}).
+        (default: {True}).
         extrapolate_trend {int} -- If set to > 0, the trend resulting from the
         convolution is linear least-squares extrapolated on both ends (or the
         single one if two_sided is False) considering this many (+1) closest
         points. If set to ‘freq’, use freq closest points. Setting this
         parameter results in no NaN values in trend or resid components
-        (default: {False}).
+        (default: {0}).
         lang {str} -- output language (default: {"pt"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
@@ -116,7 +114,7 @@ if __name__ == "__main__":
         type=str,
         default="additive",
         help="""Type of seasonal component. Abbreviations are accepted
-        (default: None).""",
+        {“additive”, “multiplicative”} (default: 'additive').""",
     )
     ap.add_argument(
         "-ft",
@@ -124,7 +122,7 @@ if __name__ == "__main__":
         nargs="*",
         help="""The filter coefficients for filtering out the seasonal
         component. The concrete moving average method used in filtering is
-        determined by two_sided.(default: None).""",
+        determined by two_sided (default: None).""",
     )
     ap.add_argument(
         "-fq",
@@ -143,7 +141,7 @@ if __name__ == "__main__":
         help="""The moving average method used in filtering. If
         True (default), a centered moving average is computed using the filt.
         If False, the filter coefficients are for past values only
-        (default: None).""",
+        (default: True).""",
     )
     ap.add_argument(
         "-e",
@@ -155,7 +153,7 @@ if __name__ == "__main__":
         single one if two_sided is False) considering this many (+1) closest
         points. If set to ‘freq’, use freq closest points. Setting this
         parameter results in no NaN values in trend or resid components
-        (default: False).""",
+        (default: 0).""",
     )
     ap.add_argument(
         "-l",
