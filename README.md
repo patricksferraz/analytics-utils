@@ -211,11 +211,11 @@ optional arguments:
 python analytics-utils/interpolate.py -d dataset.csv -f out.json
 ```
 
-# rolling window
+### rolling window
 
 This function Provide rolling window calculations. This is a adapted rolling function of pandas package.
 
-## function
+#### function
 
 ```python
 from analytics_utils.roll import roll
@@ -231,7 +231,7 @@ roll(dataframe, window, roll_type, headers)
   - var (variance)
   - std (standard deviation)
 
-## terminal
+#### terminal
 
 - **Help message**
 
