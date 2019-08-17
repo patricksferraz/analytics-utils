@@ -205,6 +205,7 @@ if __name__ == "__main__":
         two_sided=args["two_sided"],
         extrapolate_trend=args["extrapolate_trend"],
         lang=args["lang"],
+        headers=args["headers"],
     )
 
     # Output in json format
