@@ -32,11 +32,20 @@ def linear_regression(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        fit_intercept {bool} -- [description] (default: {True})
-        normalize {bool} -- [description] (default: {False})
-        copy_X {bool} -- [description] (default: {True})
-        n_jobs {int} -- [description] (default: {None})
-        offset {int} -- [description] (default: {1})
+        fit_intercept {bool} -- whether to calculate the intercept for this
+        model. If set to False, no intercept will be used in calculations (e.g.
+        data is expected to be already centered) (default: {True})
+        normalize {bool} -- This parameter is ignored when fit_intercept is set
+        to False. If True, the regressors X will be normalized before
+        regression by subtracting the mean and dividing by the l2-norm
+        (default: {False})
+        copy_X {bool} -- If True, X will be copied; else, it may be overwritten
+        (default: {True})
+        n_jobs {int} -- The number of jobs to use for the computation. This
+        will only provide speedup for n_targets > 1 and sufficient large
+        problems (default: {None})
+        offset {int} -- Offset for predict (p.ex. if 1 regressor [:-1]
+        predictor [1:]) (default: {1})
         regressors {[str]} -- chosen dataframe headers for regressor
         (default: {None}).
         predictors {[str]} -- chosen dataframe headers for predcitor
@@ -47,7 +56,7 @@ def linear_regression(
         ValueError: Predictors cannot be None
 
     Returns:
-        pd.DataFrame --
+        pd.DataFrame -- Returns predicted values.
     """
 
     if offset < 1:
@@ -62,7 +71,9 @@ def linear_regression(
 
     model = LinearRegression().fit(x, y)
 
-    return pd.DataFrame(model.predict(data_frame), columns=predictors)
+    return pd.DataFrame(
+        model.predict(data_frame), columns=["predict_" + p for p in predictors]
+    )
 
 
 if __name__ == "__main__":
