@@ -25,7 +25,6 @@ def autocorrelation(
     fft: bool = None,
     alpha: float = None,
     missing: str = "none",
-    lang: str = "pt",
     headers: [str] = None,
 ) -> pd.DataFrame:
     """Autocorrelation function for 1d arrays. This is a adapted acf function
@@ -121,13 +120,6 @@ if __name__ == "__main__":
         specifying how the NaNs are to be treated.""",
     )
     ap.add_argument(
-        "-l",
-        "--lang",
-        type=str,
-        default="pt",
-        help="language for the output result {'pt', 'en'} (default: 'pt')",
-    )
-    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -167,7 +159,6 @@ if __name__ == "__main__":
         fft=args["fft"],
         alpha=args["alpha"],
         missing=args["missing"],
-        lang=args["lang"],
         headers=args["headers"],
     )
 
