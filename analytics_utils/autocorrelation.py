@@ -2,13 +2,14 @@
 """
 This is the find module.
 The find module supplies one function,
-    def decompose(
+    def autocorrelation(
         data_frame: pd.DataFrame,
-        model: str = "additive",
-        filt: [] = None,
-        freq: int = None,
-        two_sided: bool = True,
-        extrapolate_trend: int = 0,
+        unbiased: bool = False,
+        nlags: int = 40,
+        fft: bool = None,
+        alpha: float = None,
+        missing: str = "none",
+        lang: str = "pt",
         headers: [str] = None,
     ) -> pd.DataFrame
 """
