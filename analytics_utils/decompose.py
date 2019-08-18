@@ -9,6 +9,7 @@ The find module supplies one function,
         freq: int = None,
         two_sided: bool = True,
         extrapolate_trend: int = 0,
+        lang: str = "pt",
         headers: [str] = None,
     ) -> pd.DataFrame
 """
