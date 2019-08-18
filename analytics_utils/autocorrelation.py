@@ -34,12 +34,21 @@ def autocorrelation(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        unbiased {bool} -- (default: {True}).
+        unbiased {bool} -- If True, then denominators for autocovariance are
+        n-k, otherwise n (default: {False}).
+        nlags {int} --     Number of lags to return autocorrelation for
+        (default: {40}).
+        fft {bool} -- If True, computes the ACF via FFT (default: {None}).
+        alpha {float} -- If a number is given, the confidence intervals for the
+        given level are returned. For instance if alpha=.05, 95 % confidence
+        intervals are returned where the standard deviation is computed
+        according to Bartlett’s formula (default: {None}).
+        missing {str} -- A string in [‘none’, ‘raise’, ‘conservative’, ‘drop’]
+        specifying how the NaNs are to be treated (default: {"none"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
-        pd.DataFrame -- A object with observed, seasonal, trend, and resid
-        attributes.
+        pd.DataFrame -- A object with autocorrelation function.
     """
 
     if headers:
