@@ -2,12 +2,15 @@
 """
 This is the find module.
 The find module supplies one function,
-    def partial_autocorrelation(
+    def linear_regression(
         data_frame: pd.DataFrame,
-        nlags: int = 40,
-        method: str = "ywunbiased",
-        alpha: float = None,
-        headers: [str] = None,
+        fit_intercept: bool = True,
+        normalize: bool = False,
+        copy_X: bool = True,
+        n_jobs: int = None,
+        offset: int = 1,
+        regressors: [str] = None,
+        predictors: [str] = None,
     ) -> pd.DataFrame
 """
 
