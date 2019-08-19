@@ -7,8 +7,8 @@ The find module supplies one function,
     ) -> pd.DataFrame
 """
 
-from analytics_utils.lang.phrases import phrases
-from analytics_utils.lang.words import words
+from analytics_utils.lang import phrases
+from analytics_utils.lang import words
 import pandas as pd
 
 

@@ -15,7 +15,7 @@ The find module supplies one function,
 """
 
 from statsmodels.tsa.seasonal import seasonal_decompose
-from analytics_utils.lang.words import words
+from analytics_utils.lang import words
 import pandas as pd
 
 
