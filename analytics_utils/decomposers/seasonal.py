@@ -15,15 +15,11 @@ The find module supplies one function,
 """
 
 from statsmodels.tsa.seasonal import seasonal_decompose
+from analytics_utils.lang.words import words
 import pandas as pd
 
-if __name__ == "__main__":
-    from lang.words import words
-else:
-    from analytics_utils.lang.words import words
 
-
-def decompose(
+def seasonal(
     data_frame: pd.DataFrame,
     model: str = "additive",
     filt: [] = None,
@@ -192,7 +188,7 @@ if __name__ == "__main__":
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
     # Apply ewm
-    result = decompose(
+    result = seasonal(
         pd.read_csv(
             args["dataset"],
             parse_dates=args["parse_dates"],
