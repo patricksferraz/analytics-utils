@@ -7,14 +7,10 @@ The find module supplies one function,
     ) -> pd.DataFrame
 """
 
+from analytics_utils.lang.phrases import phrases
+from analytics_utils.lang.words import words
 import pandas as pd
 
-if __name__ == "__main__":
-    from lang.words import words
-    from lang.phrases import phrases
-else:
-    from analytics_utils.lang.words import words
-    from analytics_utils.lang.phrases import phrases
 
 FIRST_QUARTILE = 0.25
 THIRD_QUARTILE = 0.75
