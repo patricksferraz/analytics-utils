@@ -2,7 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def decompose(
+    def seasonal(
         data_frame: pd.DataFrame,
         model: str = "additive",
         filt: [] = None,
