@@ -4,3 +4,5 @@
 .tox/
 .vscode
 .ipynb_checkpoints
+build/
+dist/
