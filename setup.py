@@ -17,6 +17,14 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/patricksferraz/analytics-utils",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "numba>=0.45.1",
+        "numpy>=1.16.4",
+        "pandas>=0.25.0",
+        "pyts==0.8.0",
+        "scikit-learn>=0.21.2",
+        "statsmodels>=0.10.1",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
