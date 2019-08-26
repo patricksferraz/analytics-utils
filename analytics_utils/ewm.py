@@ -35,15 +35,15 @@ def ewm(
 
     Keyword Arguments:
         com {int} -- Specify decay in terms of center of mass, α=1/(1+com),
-        for com≥0 (default: {None}).
+            for com≥0 (default: {None}).
         span {float} -- Specify decay in terms of span, α=2/(span+1),
-        for span≥1. (default: {None}).
+            for span≥1. (default: {None}).
         halflife {float} -- Specify decay in terms of half-life,
-        α=1−exp(log(0.5)/halflife),for halflife>0 (default: {None}).
-        alpha {float} -- Specify smoothing factor α directly, 0<α≤1
-        (default: {None}).
+            α=1−exp(log(0.5)/halflife),for halflife>0 (default: {None}).
+            alpha {float} -- Specify smoothing factor α directly, 0<α≤1
+            (default: {None}).
         ignore_na {bool} -- Ignore missing values when calculating weights;
-        specify True to reproduce pre-0.15.0 behavior.(default: {False}).
+            specify True to reproduce pre-0.15.0 behavior.(default: {False}).
         ewm_type {str} -- {‘mean’, ‘var’, 'std'} (default: {"mean"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 

@@ -36,23 +36,23 @@ def linear_regression(
 
     Keyword Arguments:
         fit_intercept {bool} -- whether to calculate the intercept for this
-        model. If set to False, no intercept will be used in calculations (e.g.
-        data is expected to be already centered) (default: {True})
+            model. If set to False, no intercept will be used in calculations
+            (e.g. data is expected to be already centered) (default: {True})
         normalize {bool} -- This parameter is ignored when fit_intercept is set
-        to False. If True, the regressors X will be normalized before
-        regression by subtracting the mean and dividing by the l2-norm
-        (default: {False})
+            to False. If True, the regressors X will be normalized before
+            regression by subtracting the mean and dividing by the l2-norm
+            (default: {False})
         copy_X {bool} -- If True, X will be copied; else, it may be overwritten
-        (default: {True})
+            (default: {True})
         n_jobs {int} -- The number of jobs to use for the computation. This
-        will only provide speedup for n_targets > 1 and sufficient large
-        problems (default: {None})
+            will only provide speedup for n_targets > 1 and sufficient large
+            problems (default: {None})
         offset {int} -- Offset for predict (p.ex. if 1 regressor [:-1]
-        predictor [1:]) (default: {1})
+            predictor [1:]) (default: {1})
         regressors {[str]} -- chosen dataframe headers for regressor
-        (default: {None}).
+            (default: {None}).
         predictors {[str]} -- chosen dataframe headers for predcitor
-        (default: {None}).
+            (default: {None}).
 
     Raises:
         ValueError: Offset cannot be less than 1

@@ -37,29 +37,29 @@ def seasonal(
 
     Keyword Arguments:
         model {str} -- {“additive”, “multiplicative”}. Type of seasonal
-        component. Abbreviations are accepted (default: {'additive'}).
-        filt {[]]} -- The filter coefficients for filtering out the seasonal
-        component. The concrete moving average method used in filtering is
-        determined by two_sided.(default: {None}).
+            component. Abbreviations are accepted (default: {'additive'}).
+        filt {[]} -- The filter coefficients for filtering out the seasonal
+            component. The concrete moving average method used in filtering is
+            determined by two_sided.(default: {None}).
         freq {int} -- Frequency of the series. Must be used if x is not a
-        pandas object. Overrides default periodicity of x if x is a pandas
-        object with a timeseries index (default: {None}).
+            pandas object. Overrides default periodicity of x if x is a pandas
+            object with a timeseries index (default: {None}).
         two_sided {bool} -- The moving average method used in filtering. If
-        True, a centered moving average is computed using the filt.
-        If False, the filter coefficients are for past values only
-        (default: {True}).
+            True, a centered moving average is computed using the filt.
+            If False, the filter coefficients are for past values only
+            (default: {True}).
         extrapolate_trend {int} -- If set to > 0, the trend resulting from the
-        convolution is linear least-squares extrapolated on both ends (or the
-        single one if two_sided is False) considering this many (+1) closest
-        points. If set to ‘freq’, use freq closest points. Setting this
-        parameter results in no NaN values in trend or resid components
-        (default: {0}).
+            convolution is linear least-squares extrapolated on both ends (or
+            the single one if two_sided is False) considering this many (+1)
+            closest points. If set to ‘freq’, use freq closest points. Setting
+            this parameter results in no NaN values in trend or resid
+            components (default: {0}).
         lang {str} -- output language (default: {"pt"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
         pd.DataFrame -- A object with observed, seasonal, trend, and resid
-        attributes.
+            attributes.
     """
 
     if headers:

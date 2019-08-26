@@ -30,15 +30,15 @@ def partial_autocorrelation(
 
     Keyword Arguments:
         nlags {int} -- largest lag for which the pacf is returned
-        (default: {40}).
+            (default: {40}).
         method {str} -- A string in [‘yw’ or ‘ywunbiased’, ‘ywm’ or ‘ywmle’,
-        ‘ols’, ‘ols-inefficient’, ‘ols-unbiased’, ‘ld’ or ‘ldunbiased’, ‘ldb’
-        or ‘ldbiased’] specifies which method for the calculations to use
-        (default: {"ywunbiased"}).
+            ‘ols’, ‘ols-inefficient’, ‘ols-unbiased’, ‘ld’ or ‘ldunbiased’,
+            ‘ldb’ or ‘ldbiased’] specifies which method for the calculations to
+            use (default: {"ywunbiased"}).
         alpha {float} -- If a number is given, the confidence intervals for the
-        given level are returned. For instance if alpha=.05, 95 % confidence
-        intervals are returned where the standard deviation is computed
-        according to 1/sqrt(len(x)) (default: {None}).
+            given level are returned. For instance if alpha=.05, 95% confidence
+            intervals are returned where the standard deviation is computed
+            according to 1/sqrt(len(x)) (default: {None}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:

@@ -27,8 +27,8 @@ def roll(
 
     Keyword Arguments:
         window {int} -- Size of the moving window. This is the number of
-        observations used for calculating the statistic. Each window will be a
-        fixed size.
+            observations used for calculating the statistic. Each window will
+            be a fixed size.
         roll_type {str} -- {‘mean’, ‘var’, 'std'} (default: {"mean"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 

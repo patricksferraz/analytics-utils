@@ -28,16 +28,16 @@ def ssa(
 
     Keyword Arguments:
         window_size {int or float} -- Size of the sliding window (i.e. the size
-        of each word). If float, it represents the percentage of the size of
-        each time series and must be between 0 and 1. The window size will be
-        computed as ``max(2, ceil(self.window_size * n_timestamps))``
-        (default: {4}).
-        groups {int or [int]} -- The way the elementary matrices are grouped. If
-        None, no grouping is performed. If an integer, it represents the number
-        of groups and the bounds of the groups are computed as
-        ``np.linspace(0, window_size, groups + 1).astype('int64')``.
-        If array-like, each element must be array-like and contain the indices
-        for each group. (default: {None}).
+            of each word). If float, it represents the percentage of the size
+            of each time series and must be between 0 and 1. The window size
+            will be computed as
+            ``max(2, ceil(self.window_size * n_timestamps))`` (default: {4}).
+        groups {int or [int]} -- The way the elementary matrices are grouped.
+            If None, no grouping is performed. If an integer, it represents the
+            number of groups and the bounds of the groups are computed as
+            ``np.linspace(0, window_size, groups + 1).astype('int64')``.
+            If array-like, each element must be array-like and contain the
+            indices for each group. (default: {None}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:

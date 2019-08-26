@@ -21,10 +21,10 @@ def correlate(
 
     Keyword Arguments:
         method {str} -- {‘pearson’, ‘kendall’, ‘spearman’} or callable with
-        input two 1d ndarrays (default: {"pearson"})
+            input two 1d ndarrays (default: {"pearson"})
         min_periods {int} -- Minimum number of observations required per pair
-        of columns to have a valid result. Currently only available for Pearson
-        and Spearman correlation. (default: {1})
+            of columns to have a valid result. Currently only available for
+            Pearson and Spearman correlation. (default: {1})
 
     Returns:
         pd.DataFrame -- Correlation matrix.

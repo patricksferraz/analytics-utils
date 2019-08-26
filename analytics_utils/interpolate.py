@@ -27,12 +27,12 @@ def interpolate(
 
     Keyword Arguments:
         limit {int} -- Maximum number of consecutive NaNs to fill
-        (default: {None}).
+            (default: {None}).
         method {str} -- Please note that only method='linear' is supported for
-        DataFrame/Series with a MultiIndex. {‘linear’, ‘time’, ‘index’,
-        ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
-        ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’ ‘piecewise_polynomial’,
-        ‘pchip’} (default: {"linear"}).
+            DataFrame/Series with a MultiIndex. {‘linear’, ‘time’, ‘index’,
+            ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
+            ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’,
+            ‘piecewise_polynomial’, ‘pchip’} (default: {"linear"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:

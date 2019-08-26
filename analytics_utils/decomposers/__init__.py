@@ -2,6 +2,7 @@
 algorithms."""
 
 from .seasonal import seasonal
+from .ssa import ssa
 
 
-__all__ = ["seasonal"]
+__all__ = ["seasonal", "ssa"]

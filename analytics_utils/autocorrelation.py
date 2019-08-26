@@ -35,16 +35,16 @@ def autocorrelation(
 
     Keyword Arguments:
         unbiased {bool} -- If True, then denominators for autocovariance are
-        n-k, otherwise n (default: {False}).
+            n-k, otherwise n (default: {False}).
         nlags {int} --     Number of lags to return autocorrelation for
-        (default: {40}).
+            (default: {40}).
         fft {bool} -- If True, computes the ACF via FFT (default: {None}).
         alpha {float} -- If a number is given, the confidence intervals for the
-        given level are returned. For instance if alpha=.05, 95 % confidence
-        intervals are returned where the standard deviation is computed
-        according to Bartlett’s formula (default: {None}).
+            given level are returned. For instance if alpha=.05, 95% confidence
+            intervals are returned where the standard deviation is computed
+            according to Bartlett’s formula (default: {None}).
         missing {str} -- A string in [‘none’, ‘raise’, ‘conservative’, ‘drop’]
-        specifying how the NaNs are to be treated (default: {"none"}).
+            specifying how the NaNs are to be treated (default: {"none"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
 
     Returns:
