@@ -15,7 +15,7 @@ The find module supplies one function,
 """
 
 from statsmodels.tsa.seasonal import seasonal_decompose
-from analytics_utils.lang import words
+from analytics_utils.lang import Lang
 import pandas as pd
 
 
@@ -62,6 +62,8 @@ def seasonal(
             attributes.
     """
 
+    lang = Lang(lang)
+
     if headers:
         data_frame = data_frame.loc[:, headers]
 
@@ -76,10 +78,10 @@ def seasonal(
     return pd.DataFrame(
         [
             {
-                words["observed"][lang]: seasonal.observed,
-                words["seasonal"][lang]: seasonal.seasonal,
-                words["trend"][lang]: seasonal.trend,
-                words["resid"][lang]: seasonal.resid,
+                lang.word("observed"): seasonal.observed,
+                lang.word("seasonal"): seasonal.seasonal,
+                lang.word("trend"): seasonal.trend,
+                lang.word("resid"): seasonal.resid,
             }
         ]
     )
