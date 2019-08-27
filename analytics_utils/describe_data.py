@@ -43,21 +43,21 @@ def describe_data(
         _count = column.count()
 
         return {
-            lang.words("header"): header,
-            lang.words("max"): _max,
-            lang.words("min"): _min,
-            lang.words("mean"): column.mean(),
-            lang.words("median"): column.median(),
+            lang.word("header"): header,
+            lang.word("max"): _max,
+            lang.word("min"): _min,
+            lang.word("mean"): column.mean(),
+            lang.word("median"): column.median(),
             lang.phrase("quartile", "1"): column.quantile(FIRST_QUARTILE),
             lang.phrase("quartile", "3"): column.quantile(THIRD_QUARTILE),
-            lang.words("var"): column.var(),
-            lang.words("std"): column.std(),
-            lang.words("mad"): column.mad(),
-            lang.words("amp"): _max - _min,
-            lang.words("rms"): sum((column.pow(2)) / (_count)) ** (1 / 2),
-            lang.words("kurtosis"): column.kurtosis(),
-            lang.words("skew"): column.skew(),
-            lang.words("count"): _count,
+            lang.word("var"): column.var(),
+            lang.word("std"): column.std(),
+            lang.word("mad"): column.mad(),
+            lang.word("amp"): _max - _min,
+            lang.word("rms"): sum((column.pow(2)) / (_count)) ** (1 / 2),
+            lang.word("kurtosis"): column.kurtosis(),
+            lang.word("skew"): column.skew(),
+            lang.word("count"): _count,
         }
 
     if not headers:
