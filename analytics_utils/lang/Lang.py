@@ -38,8 +38,9 @@ class Lang:
             str -- Phrase
         """
         if phrase not in self._phrases:
-            word = self._words["phrase"]["en"]
-            raise ValueError(f"{self._phrases['unsupported']['en'](word)}")
+            raise ValueError(
+                f"{self.phrase('unsupported', self.word('phrase'))}"
+            )
         return self._phrases[phrase][self.lang](complement)
 
     def words(self):
@@ -63,8 +64,9 @@ class Lang:
             str -- Word
         """
         if word not in self._words:
-            word = self._words["word"]["en"]
-            raise ValueError(f"{self._phrases['unsupported']['en'](word)}")
+            raise ValueError(
+                f"{self.phrase('unsupported', self.word('word'))}"
+            )
         return self._words[word][self.lang]
 
     @property
