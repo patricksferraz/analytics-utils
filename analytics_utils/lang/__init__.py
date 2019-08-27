@@ -2,5 +2,7 @@
 
 from .phrases import phrases
 from .words import words
+from .langs import langs
+from .Lang import Lang
 
-__all__ = ["phrases", "words"]
+__all__ = ["phrases", "words", "langs", "Lang"]
