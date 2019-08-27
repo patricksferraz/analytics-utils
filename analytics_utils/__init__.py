@@ -10,7 +10,7 @@ from .correlate import correlate
 from .roll import roll
 from .ewm import ewm
 
-__version__ = "0.2.dev0"
+__version__ = "0.3.dev0"
 __all__ = [
     "partial_autocorrelation",
     "linear_regression",
