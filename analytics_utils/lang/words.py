@@ -4,10 +4,6 @@ words = {
     "min": {"en": "min", "pt": "min"},
     "mean": {"en": "mean", "pt": "média"},
     "median": {"en": "median", "pt": "mediana"},
-    "quartile": {
-        "en": lambda x: f"{x}-quartile",
-        "pt": lambda x: f"{x}-quartil",
-    },
     "var": {"en": "variance", "pt": "variância"},
     "std": {"en": "standard deviation", "pt": "desvio padrão"},
     "mad": {"en": "absolute deviation", "pt": "desvio absoluto"},
@@ -21,4 +17,6 @@ words = {
     "seasonal": {"en": "seasonal", "pt": "sazonal"},
     "trend": {"en": "trend", "pt": "tendência"},
     "resid": {"en": "residual", "pt": "residual"},
+    "word": {"en": "word", "pt": "palavra"},
+    "phrase": {"en": "phrase", "pt": "frase"},
 }
