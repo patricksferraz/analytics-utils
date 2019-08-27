@@ -19,4 +19,5 @@ words = {
     "resid": {"en": "residual", "pt": "residual"},
     "word": {"en": "word", "pt": "palavra"},
     "phrase": {"en": "phrase", "pt": "frase"},
+    "nans": {"en": "NaNs", "pt": "NaNs"},
 }

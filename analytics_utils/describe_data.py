@@ -58,6 +58,7 @@ def describe_data(
             lang.word("kurtosis"): column.kurtosis(),
             lang.word("skew"): column.skew(),
             lang.word("count"): _count,
+            lang.word("nans"): column.isna().sum(),
         }
 
     if not headers:
