@@ -7,8 +7,7 @@ The find module supplies one function,
     ) -> pd.DataFrame
 """
 
-from analytics_utils.lang import phrases
-from analytics_utils.lang import words
+from analytics_utils.lang import Lang
 import pandas as pd
 
 
@@ -36,38 +35,37 @@ def describe_data(
         pd.Dataframe -- dataframe with the descriptions
     """
 
-    def _apply(header: str, column: []):
-        try:
-            _max = column.max()
-            _min = column.min()
-            _count = column.count()
+    lang = Lang(lang)
 
-            return {
-                words["header"][lang]: header,
-                words["max"][lang]: _max,
-                words["min"][lang]: _min,
-                words["mean"][lang]: column.mean(),
-                words["median"][lang]: column.median(),
-                words["quartile"][lang]("1"): column.quantile(FIRST_QUARTILE),
-                words["quartile"][lang]("3"): column.quantile(THIRD_QUARTILE),
-                words["var"][lang]: column.var(),
-                words["std"][lang]: column.std(),
-                words["mad"][lang]: column.mad(),
-                words["amp"][lang]: _max - _min,
-                words["rms"][lang]: sum((column.pow(2)) / (_count)) ** (1 / 2),
-                words["kurtosis"][lang]: column.kurtosis(),
-                words["skew"][lang]: column.skew(),
-                words["count"][lang]: _count,
-            }
-        except KeyError:
-            return {"error": phrases["unsupported"]["pt"](words["lang"]["pt"])}
+    def _apply(header: str, column: []):
+        _max = column.max()
+        _min = column.min()
+        _count = column.count()
+
+        return {
+            lang.words("header"): header,
+            lang.words("max"): _max,
+            lang.words("min"): _min,
+            lang.words("mean"): column.mean(),
+            lang.words("median"): column.median(),
+            lang.phrase("quartile", "1"): column.quantile(FIRST_QUARTILE),
+            lang.phrase("quartile", "3"): column.quantile(THIRD_QUARTILE),
+            lang.words("var"): column.var(),
+            lang.words("std"): column.std(),
+            lang.words("mad"): column.mad(),
+            lang.words("amp"): _max - _min,
+            lang.words("rms"): sum((column.pow(2)) / (_count)) ** (1 / 2),
+            lang.words("kurtosis"): column.kurtosis(),
+            lang.words("skew"): column.skew(),
+            lang.words("count"): _count,
+        }
 
     if not headers:
         headers = data_frame.columns
 
     return pd.DataFrame(
         [_apply(_, data_frame.loc[:, _]) for _ in headers]
-    ).set_index(words["header"][lang])
+    ).set_index(lang.word("header"))
 
 
 if __name__ == "__main__":
