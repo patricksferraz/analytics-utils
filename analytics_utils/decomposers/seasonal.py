@@ -2,16 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def seasonal(
-        data_frame: pd.DataFrame,
-        model: str = "additive",
-        filt: [] = None,
-        freq: int = None,
-        two_sided: bool = True,
-        extrapolate_trend: int = 0,
-        lang: str = "pt",
-        headers: [str] = None,
-    ) -> pd.DataFrame
+    seasonal()
 """
 
 from statsmodels.tsa.seasonal import seasonal_decompose
@@ -36,26 +27,10 @@ def seasonal(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        model {str} -- {“additive”, “multiplicative”}. Type of seasonal
-            component. Abbreviations are accepted (default: {'additive'}).
-        filt {[]} -- The filter coefficients for filtering out the seasonal
-            component. The concrete moving average method used in filtering is
-            determined by two_sided.(default: {None}).
-        freq {int} -- Frequency of the series. Must be used if x is not a
-            pandas object. Overrides default periodicity of x if x is a pandas
-            object with a timeseries index (default: {None}).
-        two_sided {bool} -- The moving average method used in filtering. If
-            True, a centered moving average is computed using the filt.
-            If False, the filter coefficients are for past values only
-            (default: {True}).
-        extrapolate_trend {int} -- If set to > 0, the trend resulting from the
-            convolution is linear least-squares extrapolated on both ends (or
-            the single one if two_sided is False) considering this many (+1)
-            closest points. If set to ‘freq’, use freq closest points. Setting
-            this parameter results in no NaN values in trend or resid
-            components (default: {0}).
         lang {str} -- output language (default: {"pt"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
+
+        {others params} -- See statsmodels.tsa.seasonal.seasonal_decompose
 
     Returns:
         pd.DataFrame -- A object with observed, seasonal, trend, and resid
@@ -108,53 +83,6 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "-m",
-        "--model",
-        type=str,
-        default="additive",
-        help="""Type of seasonal component. Abbreviations are accepted
-        {“additive”, “multiplicative”} (default: 'additive').""",
-    )
-    ap.add_argument(
-        "-ft",
-        "--filt",
-        nargs="*",
-        help="""The filter coefficients for filtering out the seasonal
-        component. The concrete moving average method used in filtering is
-        determined by two_sided (default: None).""",
-    )
-    ap.add_argument(
-        "-fq",
-        "--freq",
-        type=int,
-        default=None,
-        help="""Frequency of the series. Must be used if x is not a
-        pandas object. Overrides default periodicity of x if x is a pandas
-        object with a timeseries index (default: None).""",
-    )
-    ap.add_argument(
-        "-t",
-        "--two-sided",
-        type=bool,
-        default=True,
-        help="""The moving average method used in filtering. If
-        True (default), a centered moving average is computed using the filt.
-        If False, the filter coefficients are for past values only
-        (default: True).""",
-    )
-    ap.add_argument(
-        "-e",
-        "--extrapolate-trend",
-        type=int,
-        default=0,
-        help="""If set to > 0, the trend resulting from the
-        convolution is linear least-squares extrapolated on both ends (or the
-        single one if two_sided is False) considering this many (+1) closest
-        points. If set to ‘freq’, use freq closest points. Setting this
-        parameter results in no NaN values in trend or resid components
-        (default: 0).""",
-    )
-    ap.add_argument(
         "-l",
         "--lang",
         type=str,
@@ -183,6 +111,11 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
+    ap.add_argument("--model", type=str, default="additive")
+    ap.add_argument("--filt", nargs="*")
+    ap.add_argument("--freq", type=int, default=None)
+    ap.add_argument("--two-sided", type=bool, default=True)
+    ap.add_argument("--extrapolate-trend", type=int, default=0)
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
