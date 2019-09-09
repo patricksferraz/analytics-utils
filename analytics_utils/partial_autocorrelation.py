@@ -2,13 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def partial_autocorrelation(
-        data_frame: pd.DataFrame,
-        nlags: int = 40,
-        method: str = "ywunbiased",
-        alpha: float = None,
-        headers: [str] = None,
-    ) -> pd.DataFrame
+    partial_autocorrelation()
 """
 
 from statsmodels.tsa.stattools import pacf
@@ -29,17 +23,9 @@ def partial_autocorrelation(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        nlags {int} -- largest lag for which the pacf is returned
-            (default: {40}).
-        method {str} -- A string in [‘yw’ or ‘ywunbiased’, ‘ywm’ or ‘ywmle’,
-            ‘ols’, ‘ols-inefficient’, ‘ols-unbiased’, ‘ld’ or ‘ldunbiased’,
-            ‘ldb’ or ‘ldbiased’] specifies which method for the calculations to
-            use (default: {"ywunbiased"}).
-        alpha {float} -- If a number is given, the confidence intervals for the
-            given level are returned. For instance if alpha=.05, 95% confidence
-            intervals are returned where the standard deviation is computed
-            according to 1/sqrt(len(x)) (default: {None}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
+
+        {others params} -- See statsmodels.tsa.stattools.pacf
 
     Returns:
         pd.DataFrame -- A object with partial autocorrelations, nlags elements,
@@ -75,33 +61,6 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "-n",
-        "--nlags",
-        type=int,
-        default=40,
-        help="""largest lag for which the pacf is returned (default: 40).""",
-    )
-    ap.add_argument(
-        "-m",
-        "--method",
-        type=str,
-        default="ywunbiased",
-        help="""A string in [‘yw’ or ‘ywunbiased’, ‘ywm’ or ‘ywmle’,
-        ‘ols’, ‘ols-inefficient’, ‘ols-unbiased’, ‘ld’ or ‘ldunbiased’, ‘ldb’
-        or ‘ldbiased’] specifies which method for the calculations to use
-        (default: "ywunbiased")""",
-    )
-    ap.add_argument(
-        "-a",
-        "--alpha",
-        type=float,
-        default=None,
-        help="""If a number is given, the confidence intervals for the
-        given level are returned. For instance if alpha=.05, 95 %% confidence
-        intervals are returned where the standard deviation is computed
-        according to 1/sqrt(len(x)).""",
-    )
-    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -123,6 +82,9 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
+    ap.add_argument("--nlags", type=int, default=40)
+    ap.add_argument("--method", type=str, default="ywunbiased")
+    ap.add_argument("--alpha", type=float, default=None)
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
