@@ -2,16 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def autocorrelation(
-        data_frame: pd.DataFrame,
-        unbiased: bool = False,
-        nlags: int = 40,
-        fft: bool = None,
-        alpha: float = None,
-        missing: str = "none",
-        lang: str = "pt",
-        headers: [str] = None,
-    ) -> pd.DataFrame
+    autocorrelation()
 """
 
 from statsmodels.tsa.stattools import acf
@@ -34,18 +25,9 @@ def autocorrelation(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        unbiased {bool} -- If True, then denominators for autocovariance are
-            n-k, otherwise n (default: {False}).
-        nlags {int} --     Number of lags to return autocorrelation for
-            (default: {40}).
-        fft {bool} -- If True, computes the ACF via FFT (default: {None}).
-        alpha {float} -- If a number is given, the confidence intervals for the
-            given level are returned. For instance if alpha=.05, 95% confidence
-            intervals are returned where the standard deviation is computed
-            according to Bartlett’s formula (default: {None}).
-        missing {str} -- A string in [‘none’, ‘raise’, ‘conservative’, ‘drop’]
-            specifying how the NaNs are to be treated (default: {"none"}).
         headers {[str]} -- chosen dataframe headers (default: {None}).
+
+        {others params} -- See statsmodels.tsa.stattools.acf
 
     Returns:
         pd.DataFrame -- A object with autocorrelation function.
@@ -89,46 +71,6 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "-u",
-        "--unbiased",
-        type=bool,
-        default=False,
-        help="""If True, then denominators for autocovariance are n-k,
-        otherwise n""",
-    )
-    ap.add_argument(
-        "-n",
-        "--nlags",
-        type=int,
-        default=40,
-        help="""Number of lags to return autocorrelation for (default: 40).""",
-    )
-    ap.add_argument(
-        "-fft",
-        "--fft",
-        type=bool,
-        default=None,
-        help="""If True, computes the ACF via FFT.""",
-    )
-    ap.add_argument(
-        "-a",
-        "--alpha",
-        type=float,
-        default=None,
-        help="""If a number is given, the confidence intervals for the given
-        level are returned. For instance if alpha=.05, 95 %% confidence
-        intervals are returned where the standard deviation is computed
-        according to Bartlett’s formula.""",
-    )
-    ap.add_argument(
-        "-m",
-        "--missing",
-        type=str,
-        default="none",
-        help="""A string in [‘none’, ‘raise’, ‘conservative’, ‘drop’]
-        specifying how the NaNs are to be treated.""",
-    )
-    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -150,6 +92,11 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
+    ap.add_argument("--unbiased", type=bool, default=False)
+    ap.add_argument("--nlags", type=int, default=40)
+    ap.add_argument("--fft", type=bool, default=None)
+    ap.add_argument("--alpha", type=float, default=None)
+    ap.add_argument("--missing", type=str, default="none")
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
