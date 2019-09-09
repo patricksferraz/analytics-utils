@@ -2,16 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def linear_regression(
-        data_frame: pd.DataFrame,
-        fit_intercept: bool = True,
-        normalize: bool = False,
-        copy_X: bool = True,
-        n_jobs: int = None,
-        offset: int = 1,
-        regressors: [str] = None,
-        predictors: [str] = None,
-    ) -> pd.DataFrame
+    linear_regression()
 """
 
 from sklearn.linear_model import LinearRegression
@@ -35,24 +26,14 @@ def linear_regression(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        fit_intercept {bool} -- whether to calculate the intercept for this
-            model. If set to False, no intercept will be used in calculations
-            (e.g. data is expected to be already centered) (default: {True})
-        normalize {bool} -- This parameter is ignored when fit_intercept is set
-            to False. If True, the regressors X will be normalized before
-            regression by subtracting the mean and dividing by the l2-norm
-            (default: {False})
-        copy_X {bool} -- If True, X will be copied; else, it may be overwritten
-            (default: {True})
-        n_jobs {int} -- The number of jobs to use for the computation. This
-            will only provide speedup for n_targets > 1 and sufficient large
-            problems (default: {None})
         offset {int} -- Offset for predict (p.ex. if 1 regressor [:-1]
             predictor [1:]) (default: {1})
         regressors {[str]} -- chosen dataframe headers for regressor
             (default: {None}).
         predictors {[str]} -- chosen dataframe headers for predcitor
             (default: {None}).
+
+        {others params} -- See sklearn.linear_model.LinearRegression
 
     Raises:
         ValueError: Offset cannot be less than 1
@@ -72,7 +53,12 @@ def linear_regression(
         data_frame = data_frame.loc[:, regressors]
     x = data_frame[:-offset]
 
-    model = LinearRegression().fit(x, y)
+    model = LinearRegression(
+        fit_intercept=fit_intercept,
+        normalize=normalize,
+        copy_X=copy_X,
+        n_jobs=n_jobs,
+    ).fit(x, y)
 
     return pd.DataFrame(
         model.predict(data_frame), columns=["predict_" + p for p in predictors]
@@ -98,41 +84,6 @@ if __name__ == "__main__":
         help="""format json output
         {'split', 'records', 'index', 'values', 'table', 'columns'}
         (default: 'columns')""",
-    )
-    ap.add_argument(
-        "-fi",
-        "--fit-intercept",
-        type=bool,
-        default=True,
-        help="""whether to calculate the intercept for this model. If set to
-        False, no intercept will be used in calculations (e.g. data is expected
-        to be already centered) (default: True).""",
-    )
-    ap.add_argument(
-        "-n",
-        "--normalize",
-        type=bool,
-        default=False,
-        help="""This parameter is ignored when fit_intercept is set to False.
-        If True, the regressors X will be normalized before regression by
-        subtracting the mean and dividing by the l2-norm (default: False)""",
-    )
-    ap.add_argument(
-        "-c",
-        "--copy-X",
-        type=bool,
-        default=True,
-        help="""If True, X will be copied; else, it may be overwritten
-        (default: True).""",
-    )
-    ap.add_argument(
-        "-nj",
-        "--n-jobs",
-        type=int,
-        default=None,
-        help="""The number of jobs to use for the computation. This will only
-        provide speedup for n_targets > 1 and sufficient large problems
-        (default: None).""",
     )
     ap.add_argument(
         "-off",
@@ -171,6 +122,10 @@ if __name__ == "__main__":
         nargs="+",
         help="an string for the header (predictors) in the dataset",
     )
+    ap.add_argument("--fit-intercept", type=bool, default=True)
+    ap.add_argument("--normalize", type=bool, default=False)
+    ap.add_argument("--copy-X", type=bool, default=True)
+    ap.add_argument("--n-jobs", type=int, default=None)
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
