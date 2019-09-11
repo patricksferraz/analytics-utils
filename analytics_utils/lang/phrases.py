@@ -7,4 +7,5 @@ phrases = {
         "en": lambda x: f"{x}-quartile",
         "pt": lambda x: f"{x}-quartil",
     },
+    "limit": {"en": lambda x: f"{x} limit", "pt": lambda x: f"limite {x}"},
 }

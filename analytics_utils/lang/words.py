@@ -20,4 +20,6 @@ words = {
     "word": {"en": "word", "pt": "palavra"},
     "phrase": {"en": "phrase", "pt": "frase"},
     "nans": {"en": "NaNs", "pt": "NaNs"},
+    "upper": {"en": "upper", "pt": "superior"},
+    "lower": {"en": "lower", "pt": "inferior"},
 }

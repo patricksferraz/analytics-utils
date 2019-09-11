@@ -13,6 +13,7 @@ import pandas as pd
 
 FIRST_QUARTILE = 0.25
 THIRD_QUARTILE = 0.75
+IQR_CONSTANT = 1.5
 
 
 def describe_data(
@@ -41,6 +42,11 @@ def describe_data(
         _max = column.max()
         _min = column.min()
         _count = column.count()
+        _q1 = column.quantile(FIRST_QUARTILE)
+        _q3 = column.quantile(THIRD_QUARTILE)
+        _iqr = _q3 - _q1
+        _lower = max(_min, _q1 - (IQR_CONSTANT * _iqr))
+        _upper = min(_max, _q3 + (IQR_CONSTANT * _iqr))
 
         return {
             lang.word("header"): header,
@@ -48,8 +54,10 @@ def describe_data(
             lang.word("min"): _min,
             lang.word("mean"): column.mean(),
             lang.word("median"): column.median(),
-            lang.phrase("quartile", "1"): column.quantile(FIRST_QUARTILE),
-            lang.phrase("quartile", "3"): column.quantile(THIRD_QUARTILE),
+            lang.phrase("limit", lang.word("lower")): _lower,
+            lang.phrase("quartile", "1"): _q1,
+            lang.phrase("quartile", "3"): _q3,
+            lang.phrase("limit", lang.word("upper")): _upper,
             lang.word("var"): column.var(),
             lang.word("std"): column.std(),
             lang.word("mad"): column.mad(),
