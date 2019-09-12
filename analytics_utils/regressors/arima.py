@@ -162,7 +162,7 @@ def arima(
             n_periods=n_periods, return_conf_int=return_conf_int
         )
 
-        # Confidence interval
+        # Confidence interval (lconf = lower conf; uconf = upper conf)
         conf = None
         if return_conf_int:
             conf = np.array(predict[1])
