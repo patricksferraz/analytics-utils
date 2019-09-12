@@ -153,7 +153,7 @@ def arima(
         # Report
         if report:
             print(f"REPORT({column})")
-            model.summary()
+            print(model.summary())
             model.plot_diagnostics()
             plt.show()
 
