@@ -83,7 +83,7 @@ def logistic_regression(
     ).fit(x, y)
 
     return pd.DataFrame(
-        model.predict(data_frame), columns=["predict_" + p for p in predictors]
+        model.predict(data_frame), columns=[f"{p}_predict" for p in predictors]
     )
 
 
