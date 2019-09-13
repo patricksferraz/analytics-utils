@@ -9,7 +9,7 @@ from .correlate import correlate
 from .roll import roll
 from .ewm import ewm
 
-__version__ = "0.5.dev0"
+__version__ = "0.6.dev0"
 __all__ = [
     "partial_autocorrelation",
     "autocorrelation",
