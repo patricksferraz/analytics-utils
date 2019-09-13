@@ -89,7 +89,7 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
-    ap.add_argument("--window-size", type=int or float, default=2)
+    ap.add_argument("--window-size", type=int or float, default=4)
     ap.add_argument("--groups", type=int, nargs="*")
     args = vars(ap.parse_args())
 
