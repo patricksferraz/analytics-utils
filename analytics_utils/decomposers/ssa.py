@@ -42,9 +42,13 @@ def ssa(
     x_ssa = ssa.fit_transform(data_frame.T)
 
     # Decompose each feature adding each window_size in line
-    decompose = [[x for x in x_ssa[i]] for i, _ in enumerate(headers)]
+    if data_frame.shape[1] > 1:
+        decompose = [[x for x in x_ssa[i]] for i, _ in enumerate(headers)]
+        decompose = pd.DataFrame(decompose, index=headers)
+    else:
+        decompose = pd.DataFrame(x_ssa)
 
-    return pd.DataFrame(decompose, index=headers).T
+    return decompose.T
 
 
 if __name__ == "__main__":
