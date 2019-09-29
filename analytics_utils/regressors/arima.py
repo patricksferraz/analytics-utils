@@ -58,7 +58,7 @@ def arima(
     scoring_args: dict = None,
     with_intercept: bool = True,
     sarimax_kwargs: dict = None,
-    n_periods: int = 1,
+    time_step: int = 1,
     report: bool = False,
     return_conf_int: bool = False,
     regressors: [str] = None,
@@ -72,7 +72,7 @@ def arima(
         data_frame {pd.DataFrame} -- input dataframe
 
     Keyword Arguments:
-        n_periods {int} -- Period for predict (p.ex. if 1 predict for next 1
+        time_step {int} -- Period for predict (p.ex. if 1 predict for next 1
             period) (default: {1})
         report {bool} -- If True, print summary of train and plot model
             diagnostics (default: {False})
@@ -92,7 +92,7 @@ def arima(
         return_cond_int is True).
     """
 
-    if n_periods < 1:
+    if time_step < 1:
         raise ValueError("Offset cannot be less than 1")
 
     if regressors:
@@ -159,7 +159,7 @@ def arima(
 
         # Forecasting
         predict = model.predict(
-            n_periods=n_periods, return_conf_int=return_conf_int
+            n_periods=time_step, return_conf_int=return_conf_int
         )
 
         # Confidence interval (lconf = lower conf; uconf = upper conf)
@@ -335,7 +335,7 @@ if __name__ == "__main__":
         sarimax_kwargs=args["sarimax_kwargs"],
         report=args["report"],
         return_conf_int=args["return_conf_int"],
-        n_periods=args["n_periods"],
+        time_step=args["time_step"],
         regressors=args["regressors"],
         **args["fit_args"],
     )
