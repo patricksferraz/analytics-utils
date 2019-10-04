@@ -39,23 +39,31 @@ class GeneralizedLinear:
         """GeneralizedLinear. This is a adapted Linear functions of
         scikit-learn package.
 
-        Arguments:
-            df_true {pd.DataFrame} -- input dataframe for 'train'
-
-        Keyword Arguments:
-            df_pred {pd.DataFrame} -- input dataframe for forecasting
-                (default: {None})
-            time_step {int} -- time_step for predict (p.ex. if 1 forecasting
-                for next 1 time_step) (default: {1})
-            linear_type {str} -- Linear type for apply.
-                {'MultiTaskElasticNetCV', 'ElasticNetCV', 'RidgeCV', 'LassoCV',
-                'LinearRegression'} (default: {"LinearRegression"})
-            regressors {[type]} -- chosen dataframe headers for regressor
-                (default: {None})
-            predictors {[type]} -- chosen dataframe headers for predcitor
-                (default: {None})
-
-            {others params} -- See sklearn.linear_model...
+        Parameters
+        ----------
+        df_true : pd.DataFrame
+            input dataframe for 'train'
+        df_pred : pd.DataFrame, optional
+            input dataframe for forecasting, by default None
+        fit_intercept : bool, optional
+            See sklearn.linear_model, by default True
+        normalize : bool, optional
+            See sklearn.linear_model, by default False
+        time_step : int, optional
+            time_step for predict (p.ex. if 1 forecasting for next 1 time
+            step), by default 1
+        linear_type : str, optional
+            Linear type for apply. {'MultiTaskElasticNetCV', 'ElasticNetCV',
+            'RidgeCV', 'LassoCV', 'LinearRegression'}, by default
+            "LinearRegression"
+        cv : int, optional
+            See sklearn.linear_model, by default 5
+        alphas : [type], optional
+            See sklearn.linear_model, by default None
+        regressors : [type], optional
+            chosen dataframe headers for regressor, by default None
+        predictors : [type], optional
+            chosen dataframe headers for predcitor, by default None
         """
         self.df_true = df_true.copy()
         self.df_pred = df_pred.copy() if df_pred else self.df_true
@@ -83,10 +91,14 @@ class GeneralizedLinear:
     def _validate(self):
         """Validate class params
 
-        Raises:
-            ValueError: time_step cannot be less than 1
-            ValueError: Predictors cannot be None
-            ValueError: linear_type {linear_type} not exists
+        Raises
+        ------
+        ValueError
+            time_step cannot be less than 1
+        ValueError
+            Predictors cannot be None
+        ValueError
+            linear_type {linear_type} not exists
         """
         if self.time_step < 1:
             raise ValueError("time_step cannot be less than 1")
@@ -130,8 +142,10 @@ class GeneralizedLinear:
     def run(self):
         """Exec fit and forecasting from linear_type defined
 
-        Returns:
-            pd.DataFrame -- Forecasting from linear_type using time_step size
+        Returns
+        -------
+        pd.DataFrame
+            Forecasting from linear_type using time_step size
         """
         self.fit()
         return pd.concat(
@@ -217,7 +231,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply ewm
+    # Apply
     result = GeneralizedLinear(
         pd.read_csv(
             args["dataset"],
