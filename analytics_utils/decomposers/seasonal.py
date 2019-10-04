@@ -23,18 +23,29 @@ def seasonal(
     """Seasonal decomposition using moving averages. This is a adapted
     seasonal_decompose function of statsmodels package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    model : str, optional
+        See statsmodels.tsa.seasonal.seasonal_decompose, by default "additive"
+    filt : [type], optional
+        See statsmodels.tsa.seasonal.seasonal_decompose, by default None
+    freq : int, optional
+        See statsmodels.tsa.seasonal.seasonal_decompose, by default None
+    two_sided : bool, optional
+        See statsmodels.tsa.seasonal.seasonal_decompose, by default True
+    extrapolate_trend : int, optional
+        See statsmodels.tsa.seasonal.seasonal_decompose, by default 0
+    lang : str, optional
+        output language, by default "pt"
+    headers : [type], optional
+        chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        lang {str} -- output language (default: {"pt"}).
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-        {others params} -- See statsmodels.tsa.seasonal.seasonal_decompose
-
-    Returns:
-        pd.DataFrame -- A object with observed, seasonal, trend, and resid
-            attributes.
+    Returns
+    -------
+    pd.DataFrame
+        A object with observed, seasonal, trend, and resid attributes
     """
 
     lang = Lang(lang)
@@ -122,7 +133,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply ewm
+    # Apply
     result = seasonal(
         pd.read_csv(
             args["dataset"],
