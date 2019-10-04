@@ -44,7 +44,6 @@ def describe_data(
     def _apply(header: str, column: []):
         _max = column.max()
         _min = column.min()
-        _count = column.count()
 
         # Scatter
         _q1 = column.quantile(FIRST_QUARTILE)
@@ -67,10 +66,10 @@ def describe_data(
             lang.word("std"): column.std(),
             lang.word("mad"): column.mad(),
             lang.word("amp"): _max - _min,
-            lang.word("rms"): sum((column.pow(2)) / (_count)) ** (1 / 2),
+            lang.word("rms"): (column.pow(2)).mean() ** .5,
             lang.word("kurtosis"): column.kurtosis(),
             lang.word("skew"): column.skew(),
-            lang.word("count"): _count,
+            lang.word("count"): column.count(),
             lang.word("nans"): column.isna().sum(),
         }
 
