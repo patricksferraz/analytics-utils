@@ -2,9 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def describe_data(
-        data_frame: pd.DataFrame, headers: [str], lang: str = "pt"
-    ) -> pd.DataFrame
+    describe_data()
 """
 
 from analytics_utils.lang import Lang
@@ -66,7 +64,7 @@ def describe_data(
             lang.word("std"): column.std(),
             lang.word("mad"): column.mad(),
             lang.word("amp"): _max - _min,
-            lang.word("rms"): (column.pow(2)).mean() ** .5,
+            lang.word("rms"): (column.pow(2)).mean() ** 0.5,
             lang.word("kurtosis"): column.kurtosis(),
             lang.word("skew"): column.skew(),
             lang.word("count"): column.count(),
