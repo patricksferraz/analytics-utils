@@ -9,33 +9,42 @@ class Lang:
     def __init__(self, lang: str = "pt"):
         """Constructor of Lang class
 
-        Keyword Arguments:
-            lang {str} -- Language for use (default: {"pt"})
+        Parameters
+        ----------
+        lang : str, optional
+            Language for use, by default "pt"
         """
         self.lang = lang
 
     def phrases(self) -> [str]:
         """Function for return all familiar phrases
 
-        Returns:
-            [str] -- Keys of phrases
+        Returns
+        -------
+        [str]
+            Keys of phrases
         """
         return self._phrases.keys()
 
     def phrase(self, phrase: str, complement=None) -> str:
         """Function for return one phrase with complement
 
-        Arguments:
-            phrase {str} -- Choice phrase
+        Parameters
+        ----------
+        phrase : str
+            Choice phrase
+        complement : [type], optional
+            Complement of phrase, by default None
 
-        Keyword Arguments:
-            complement {Any} -- Complement of phrase (default: {None})
+        Returns
+        -------
+        str
+            Phrase
 
-        Raises:
-            ValueError: Unsupported phrase
-
-        Returns:
-            str -- Phrase
+        Raises
+        ------
+        ValueError
+            Unsupported phrase
         """
         if phrase not in self._phrases:
             raise ValueError(
@@ -43,25 +52,33 @@ class Lang:
             )
         return self._phrases[phrase][self.lang](complement)
 
-    def words(self):
+    def words(self) -> [str]:
         """Function for return all familiar words
 
-        Returns:
-            [str] -- Keys of words
+        Returns
+        -------
+        [str]
+            Keys of words
         """
         return self._words.keys()
 
-    def word(self, word):
+    def word(self, word: str) -> str:
         """Function for return one word
 
-        Arguments:
-            phrase {str} -- Choice word
+        Parameters
+        ----------
+        word : str
+            Choice word
 
-        Raises:
-            ValueError: Unsupported word
+        Returns
+        -------
+        str
+            Word
 
-        Returns:
-            str -- Word
+        Raises
+        ------
+        ValueError
+            Unsupported word
         """
         if word not in self._words:
             raise ValueError(
@@ -70,11 +87,11 @@ class Lang:
         return self._words[word][self.lang]
 
     @property
-    def lang(self):
+    def lang(self) -> str:
         return self._lang
 
     @lang.setter
-    def lang(self, lang):
+    def lang(self, lang: str):
         if lang not in self._langs:
             word = self._words["lang"]["en"]
             raise ValueError(f"{self._phrases['unsupported']['en'](word)}")
