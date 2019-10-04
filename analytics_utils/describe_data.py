@@ -24,16 +24,19 @@ def describe_data(
     mean absolute deviation, amplitude, root mean squared, kurtosis, skewness
     and count for all headers in dataframe
 
-    Arguments:
-        data_frame {pd.DataFrame} -- dataframe of input
-        headers {[str]} -- chosen dataframe headers
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        Dataframe of input
+    lang : str, optional
+        Output language, by default "pt"
+    headers : [str], optional
+        Chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        lang {str} -- output language (default: {"pt"}).
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-    Returns:
-        pd.Dataframe -- dataframe with the descriptions
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with the descriptions
     """
 
     lang = Lang(lang)
@@ -42,6 +45,8 @@ def describe_data(
         _max = column.max()
         _min = column.min()
         _count = column.count()
+
+        # Scatter
         _q1 = column.quantile(FIRST_QUARTILE)
         _q3 = column.quantile(THIRD_QUARTILE)
         _iqr = _q3 - _q1
@@ -133,7 +138,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Generates the data description
+    # Apply
     result = describe_data(
         pd.read_csv(
             args["dataset"],
