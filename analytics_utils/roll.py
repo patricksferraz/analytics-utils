@@ -2,12 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def roll(
-        data_frame: pd.DataFrame,
-        window: int,
-        roll_type: str = "mean",
-        headers: [str] = None,
-    ) -> pd.DataFrame
+    roll()
 """
 
 import pandas as pd
@@ -22,19 +17,21 @@ def roll(
     """This function Provide rolling window calculations. This is a adapted
     rolling function of pandas package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    window : int
+        See pandas.DataFrame.rolling
+    roll_type : str, optional
+        {‘mean’, ‘var’, 'std'}, by default "mean"
+    headers : [type], optional
+        chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        window {int} -- Size of the moving window. This is the number of
-            observations used for calculating the statistic. Each window will
-            be a fixed size.
-        roll_type {str} -- {‘mean’, ‘var’, 'std'} (default: {"mean"}).
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-    Returns:
-        pd.DataFrame -- a Window or Rolling sub-classed for the particular
-        operation.
+    Returns
+    -------
+    pd.DataFrame
+        a Window or Rolling sub-classed for the particular operation
     """
     rolling = {
         "mean": lambda roll: roll.mean(),
@@ -68,15 +65,6 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "-w",
-        "--window",
-        type=int,
-        required=True,
-        help="""Size of the moving window. This is the number of
-        observations used for calculating the statistic. Each window will be a
-        fixed size.""",
-    )
-    ap.add_argument(
         "-t",
         "--roll_type",
         type=str,
@@ -105,13 +93,14 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
+    ap.add_argument("--window", type=int, required=True)
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Generates the data description
+    # Apply
     result = roll(
         pd.read_csv(
             args["dataset"],
