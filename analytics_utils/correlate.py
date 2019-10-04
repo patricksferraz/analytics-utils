@@ -2,9 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def correlate(
-        data_frame: pd.DataFrame, method: str = "pearson", min_periods: int = 1
-    ) -> pd.DataFrame
+    correlate()
 """
 
 import pandas as pd
@@ -16,18 +14,19 @@ def correlate(
     """This function returns the correlation between the columns of a
     dataframe. This is the same corr function in pandas package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        Input dataframe
+    method : str, optional
+        See pandas.DataFrame.corr, by default "pearson"
+    min_periods : int, optional
+        See pandas.DataFrame.corr, by default 1
 
-    Keyword Arguments:
-        method {str} -- {‘pearson’, ‘kendall’, ‘spearman’} or callable with
-            input two 1d ndarrays (default: {"pearson"})
-        min_periods {int} -- Minimum number of observations required per pair
-            of columns to have a valid result. Currently only available for
-            Pearson and Spearman correlation. (default: {1})
-
-    Returns:
-        pd.DataFrame -- Correlation matrix.
+    Returns
+    -------
+    pd.DataFrame
+        Correlation matrix
     """
     return data_frame.corr(method, min_periods)
 
@@ -52,26 +51,11 @@ if __name__ == "__main__":
         {'split', 'records', 'index', 'values', 'table', 'columns'}
         (default: 'columns')""",
     )
-    ap.add_argument(
-        "-m",
-        "--method",
-        type=str,
-        default="pearson",
-        help="""method of correlation {‘pearson’, ‘kendall’, ‘spearman’}
-        (default: 'pearson')""",
-    )
-    ap.add_argument(
-        "-p",
-        "--min-periods",
-        type=int,
-        default=1,
-        help="""Minimum number of observations required per pair of columns to
-        have a valid result. Currently only available for Pearson and
-        Spearman correlation (default: 1).""",
-    )
+    ap.add_argument("--method", type=str, default="pearson")
+    ap.add_argument("--min-periods", type=int, default=1)
     args = vars(ap.parse_args())
 
-    # Generates the data description
+    # Apply
     result = correlate(
         pd.read_csv(args["dataset"]), args["method"], args["min_periods"]
     )
