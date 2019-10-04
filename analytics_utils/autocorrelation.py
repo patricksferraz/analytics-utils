@@ -21,16 +21,27 @@ def autocorrelation(
     """Autocorrelation function for 1d arrays. This is a adapted acf function
     of statsmodels package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        Input dataframe
+    unbiased : bool, optional
+        See statsmodels.tsa.stattools.acf, by default False
+    nlags : int, optional
+        See statsmodels.tsa.stattools.acf, by default 40
+    fft : bool, optional
+        See statsmodels.tsa.stattools.acf, by default None
+    alpha : float, optional
+        See statsmodels.tsa.stattools.acf, by default None
+    missing : str, optional
+        See statsmodels.tsa.stattools.acf, by default "none"
+    headers : [type], optional
+        Chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-        {others params} -- See statsmodels.tsa.stattools.acf
-
-    Returns:
-        pd.DataFrame -- A object with autocorrelation function.
+    Returns
+    -------
+    pd.DataFrame
+        A object with autocorrelation function.
     """
 
     if headers:
@@ -103,7 +114,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply ewm
+    # Apply
     result = autocorrelation(
         pd.read_csv(
             args["dataset"],
