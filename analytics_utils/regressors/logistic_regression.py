@@ -33,27 +33,60 @@ def logistic_regression(
     """Logistic Regression (aka logit, MaxEnt) classifier. This is a adapted
     LogisticRegression function of scikit-learn package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    penalty : str, optional
+        See sklearn.linear_model.LogisticRegression, by default "l2"
+    dual : bool, optional
+        See sklearn.linear_model.LogisticRegression, by default False
+    tol : float, optional
+        See sklearn.linear_model.LogisticRegression, by default 1e-4
+    C : float, optional
+        See sklearn.linear_model.LogisticRegression, by default 1.0
+    fit_intercept : bool, optional
+        See sklearn.linear_model.LogisticRegression, by default True
+    intercept_scaling : float, optional
+        See sklearn.linear_model.LogisticRegression, by default 1
+    class_weight : dictorstr, optional
+        See sklearn.linear_model.LogisticRegression, by default None
+    random_state : intorstr, optional
+        See sklearn.linear_model.LogisticRegression, by default None
+    solver : str, optional
+        See sklearn.linear_model.LogisticRegression, by default "liblinear"
+    max_iter : int, optional
+        See sklearn.linear_model.LogisticRegression, by default 100
+    multi_class : str, optional
+        See sklearn.linear_model.LogisticRegression, by default "ovr"
+    verbose : int, optional
+        See sklearn.linear_model.LogisticRegression, by default 0
+    warm_start : bool, optional
+        See sklearn.linear_model.LogisticRegression, by default False
+    n_jobs : int, optional
+        See sklearn.linear_model.LogisticRegression, by default None
+    l1_ratio : float, optional
+        See sklearn.linear_model.LogisticRegression, by default None
+    offset : int, optional
+        Offset for predict (p.ex. if 1 regressor [:-1] predictor [1:]), by
+        default 1
+    regressors : [str], optional
+        chosen dataframe headers for regressor, by default None
+    predictors : [str], optional
+        chosen dataframe headers for predcitor, by default None
 
-    Keyword Arguments:
-        offset {int} -- Offset for predict (p.ex. if 1 regressor [:-1]
-            predictor [1:]) (default: {1})
-        regressors {[str]} -- chosen dataframe headers for regressor
-            (default: {None}).
-        predictors {[str]} -- chosen dataframe headers for predcitor
-            (default: {None}).
+    Returns
+    -------
+    pd.DataFrame
+        Returns predicted values
 
-        {others params} -- See sklearn.linear_model.LogisticRegression
-
-    Raises:
-        ValueError: Offset cannot be less than 1
-        ValueError: Predictors cannot be None
-
-    Returns:
-        pd.DataFrame -- Returns predicted values.
+    Raises
+    ------
+    ValueError
+        Offset cannot be less than 1
+    ValueError
+        Predictors cannot be None
     """
-
     if offset < 1:
         raise ValueError("Offset cannot be less than 1")
     if not predictors:
@@ -165,7 +198,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply ewm
+    # Apply
     result = logistic_regression(
         pd.read_csv(
             args["dataset"],
