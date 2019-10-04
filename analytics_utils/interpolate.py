@@ -2,12 +2,7 @@
 """
 This is the find module.
 The find module supplies one function,
-    def interpolate(
-        data_frame: pd.DataFrame,
-        headers: [str] = None,
-        method: str = "linear",
-        limit: int = None,
-    ) -> pd.DataFrame
+    interpolate()
 """
 
 import pandas as pd
@@ -22,22 +17,21 @@ def interpolate(
     """This function returns the Series or DataFrame of same shape interpolated
     at the NaNs. This is a adapted interpolate function of pandas package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    limit : int, optional
+        See pandas.DataFrame.interpolate, by default None
+    method : str, optional
+        See pandas.DataFrame.interpolate, by default "linear"
+    headers : [str], optional
+        chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        limit {int} -- Maximum number of consecutive NaNs to fill
-            (default: {None}).
-        method {str} -- Please note that only method='linear' is supported for
-            DataFrame/Series with a MultiIndex. {‘linear’, ‘time’, ‘index’,
-            ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
-            ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’,
-            ‘piecewise_polynomial’, ‘pchip’} (default: {"linear"}).
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-    Returns:
-        pd.DataFrame -- Series or DataFrame of same shape interpolated at the
-        NaNs
+    Returns
+    -------
+    pd.DataFrame
+        Series or DataFrame of same shape interpolated at the NaNs
     """
     if headers:
         data_frame = data_frame.loc[:, headers]
@@ -65,24 +59,6 @@ if __name__ == "__main__":
         (default: 'columns')""",
     )
     ap.add_argument(
-        "-m",
-        "--method",
-        type=str,
-        default="linear",
-        help="""method of interpolation. Please note that only method='linear'
-        is supported for DataFrame/Series with a MultiIndex. {‘linear’, ‘time’,
-        ‘index’, ‘values’, ‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
-        ‘barycentric’, ‘krogh’, ‘polynomial’, ‘spline’ ‘piecewise_polynomial’,
-        ‘pchip’} (default: 'linear')""",
-    )
-    ap.add_argument(
-        "-l",
-        "--limit",
-        type=int,
-        default=None,
-        help="""Maximum number of consecutive NaNs to fill (default: None)""",
-    )
-    ap.add_argument(
         "-pd",
         "--parse-dates",
         type=str,
@@ -105,13 +81,15 @@ if __name__ == "__main__":
         nargs="*",
         help="an string for the header in the dataset",
     )
+    ap.add_argument("--method", type=str, default="linear")
+    ap.add_argument("--limit", type=int, default=None)
     args = vars(ap.parse_args())
 
     # If exist parse_dates, creates a structure with column name datetime
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Interpolated datas
+    # Apply
     result = interpolate(
         pd.read_csv(
             args["dataset"],
