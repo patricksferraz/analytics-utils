@@ -65,33 +65,126 @@ def arima(
     **fit_args,
 ) -> pd.DataFrame:
     """Ordinary least squares Linear RegressionAutomatically discover the
-    optimal order for an ARIMA model.. This is a adapted auto_arima function of
+    optimal order for an ARIMA model. This is a adapted auto_arima function of
     pmdarima package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    exogenous : [type], optional
+        See pmdarima.arima.auto_arima, by default None
+    start_p : int, optional
+        See pmdarima.arima.auto_arima, by default 2
+    d : int, optional
+        See pmdarima.arima.auto_arima, by default None
+    start_q : int, optional
+        See pmdarima.arima.auto_arima, by default 2
+    max_p : int, optional
+        See pmdarima.arima.auto_arima, by default 5
+    max_d : int, optional
+        See pmdarima.arima.auto_arima, by default 2
+    max_q : int, optional
+        See pmdarima.arima.auto_arima, by default 5
+    start_P : int, optional
+        See pmdarima.arima.auto_arima, by default 1
+    D : int, optional
+        See pmdarima.arima.auto_arima, by default None
+    start_Q : int, optional
+        See pmdarima.arima.auto_arima, by default 1
+    max_P : int, optional
+        See pmdarima.arima.auto_arima, by default 2
+    max_D : int, optional
+        See pmdarima.arima.auto_arima, by default 1
+    max_Q : int, optional
+        See pmdarima.arima.auto_arima, by default 2
+    max_order : int, optional
+        See pmdarima.arima.auto_arima, by default 10
+    m : int, optional
+        See pmdarima.arima.auto_arima, by default 1
+    seasonal : bool, optional
+        See pmdarima.arima.auto_arima, by default True
+    stationary : bool, optional
+        See pmdarima.arima.auto_arima, by default False
+    information_criterion : str, optional
+        See pmdarima.arima.auto_arima, by default "aic"
+    alpha : float, optional
+        See pmdarima.arima.auto_arima, by default 0.05
+    test : str, optional
+        See pmdarima.arima.auto_arima, by default "kpss"
+    seasonal_test : str, optional
+        See pmdarima.arima.auto_arima, by default "ocsb"
+    stepwise : bool, optional
+        See pmdarima.arima.auto_arima, by default True
+    n_jobs : int, optional
+        See pmdarima.arima.auto_arima, by default 1
+    start_params : [type], optional
+        See pmdarima.arima.auto_arima, by default None
+    trend : str, optional
+        See pmdarima.arima.auto_arima, by default None
+    method : str, optional
+        See pmdarima.arima.auto_arima, by default None
+    transparams : bool, optional
+        See pmdarima.arima.auto_arima, by default True
+    solver : str, optional
+        See pmdarima.arima.auto_arima, by default "lbfgs"
+    maxiter : int, optional
+        See pmdarima.arima.auto_arima, by default None
+    disp : int, optional
+        See pmdarima.arima.auto_arima, by default 0
+    callback : [type], optional
+        See pmdarima.arima.auto_arima, by default None
+    offset_test_args : dict, optional
+        See pmdarima.arima.auto_arima, by default None
+    seasonal_test_args : dict, optional
+        See pmdarima.arima.auto_arima, by default None
+    suppress_warnings : bool, optional
+        See pmdarima.arima.auto_arima, by default False
+    error_action : str, optional
+        See pmdarima.arima.auto_arima, by default "warn"
+    trace : bool, optional
+        See pmdarima.arima.auto_arima, by default False
+    random : bool, optional
+        See pmdarima.arima.auto_arima, by default False
+    random_state : int, optional
+        See pmdarima.arima.auto_arima, by default None
+    n_fits : int, optional
+        See pmdarima.arima.auto_arima, by default 10
+    return_valid_fits : bool, optional
+        See pmdarima.arima.auto_arima, by default False
+    out_of_sample_size : int, optional
+        See pmdarima.arima.auto_arima, by default 0
+    scoring : str, optional
+        See pmdarima.arima.auto_arima, by default "mse"
+    scoring_args : dict, optional
+        See pmdarima.arima.auto_arima, by default None
+    with_intercept : bool, optional
+        See pmdarima.arima.auto_arima, by default True
+    sarimax_kwargs : dict, optional
+        See pmdarima.arima.auto_arima, by default None
+    time_step : int, optional
+        Period for predict (p.ex. if 1 predict for next 1 period), by default 1
+    report : bool, optional
+        If True, print summary of train and plot model diagnostics, by default
+        False
+    return_conf_int : bool, optional
+        If True, return confidence interval of each regressor, by default False
+    regressors : [str], optional
+        chosen dataframe headers for regressor, by default None
 
-    Keyword Arguments:
-        time_step {int} -- Period for predict (p.ex. if 1 predict for next 1
-            period) (default: {1})
-        report {bool} -- If True, print summary of train and plot model
-            diagnostics (default: {False})
-        return_conf_int {bool} -- If True, return confidence interval of each
-            regressor (default: {False})
-        regressors {[str]} -- chosen dataframe headers for regressor
-            (default: {None}).
+    Returns
+    -------
+    pd.DataFrame
+        Returns predicted values with confidence interval (if return_cond_int
+        is True)
 
-        {others params} -- See pmdarima.arima.auto_arima
-
-    Raises:
-        ValueError: Offset cannot be less than 1
-        ValueError: Predictors cannot be None
-
-    Returns:
-        pd.DataFrame -- Returns predicted values with confidence interval (if
-        return_cond_int is True).
+    Raises
+    ------
+    ValueError
+        Offset cannot be less than 1
+    ValueError
+        Predictors cannot be None
     """
-
     if time_step < 1:
         raise ValueError("Offset cannot be less than 1")
 
@@ -282,7 +375,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply arima
+    # Apply
     result = arima(
         pd.read_csv(
             args["dataset"],
