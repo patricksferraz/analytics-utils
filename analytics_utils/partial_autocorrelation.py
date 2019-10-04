@@ -19,19 +19,25 @@ def partial_autocorrelation(
     """Partial autocorrelation estimated for 1d arrays. This is a adapted pacf
     function of statsmodels package.
 
-    Arguments:
-        data_frame {pd.DataFrame} -- input dataframe
+    Parameters
+    ----------
+    data_frame : pd.DataFrame
+        input dataframe
+    nlags : int, optional
+        See statsmodels.tsa.stattools.pacf, by default 40
+    method : str, optional
+        See statsmodels.tsa.stattools.pacf, by default "ywunbiased"
+    alpha : float, optional
+        See statsmodels.tsa.stattools.pacf, by default None
+    headers : [str], optional
+        chosen dataframe headers, by default None
 
-    Keyword Arguments:
-        headers {[str]} -- chosen dataframe headers (default: {None}).
-
-        {others params} -- See statsmodels.tsa.stattools.pacf
-
-    Returns:
-        pd.DataFrame -- A object with partial autocorrelations, nlags elements,
-        including lag zero
+    Returns
+    -------
+    pd.DataFrame
+        A object with partial autocorrelations, nlags elements, including lag
+        zero
     """
-
     if headers:
         data_frame = data_frame.loc[:, headers]
 
@@ -91,7 +97,7 @@ if __name__ == "__main__":
     if args["parse_dates"]:
         args["parse_dates"] = {"datetime": args["parse_dates"]}
 
-    # Apply ewm
+    # Apply
     result = partial_autocorrelation(
         pd.read_csv(
             args["dataset"],
